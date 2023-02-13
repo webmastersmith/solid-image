@@ -142,9 +142,17 @@ createImages([
 
 ### Resolution Switching
 
+- single url
+- single format
+- mutiple widths
+
+**createImages.ts**
+
 ```ts
 
 ```
+
+**YourComponent.tsx**
 
 ```tsx
 
@@ -152,12 +160,20 @@ createImages([
 
 ### Multiple Formats
 
+- single url
+- multiple formats
+- mutiple widths
+
+**createImages.ts**
+
 ```ts
 // w=300. Original image is 265w x 253h. Image will not be enlarged. Output will be same size as image.
 await createImages(
   'public/header/texasFlag.png?w=100;200;300&f=png;avif;webp&fallbackWidth=100&alt=Image of Texas Flag&sizes=100px&c=texasImage&sharpen=true'
 );
 ```
+
+**YourComponent.tsx**
 
 ```tsx
 import styles from './TexasImage.module.scss';
@@ -194,6 +210,12 @@ export default function TexasImage() {
 
 ### Art Direction
 
+- multiple urls
+- multiple image formats
+- multiple widths
+
+**createImages.ts**
+
 ```ts
 await createImages([
   [
@@ -224,6 +246,8 @@ await createImages([
   ],
 ]);
 ```
+
+**YourComponent.tsx**
 
 ```tsx
 import styles from './HeroImage.module.scss';
