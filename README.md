@@ -121,11 +121,11 @@ createImages([
 - **flatten**: formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
 - **flattenColor**: hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
 - **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
-- **fallbackWidth**: Width of fallback image.
+- **fallbackWidth**: width of fallback image. ex.. `fallbackWidth=700`
   - The fallback img aspect will come from the last url.
-  - Fallback Image is created in same directory as last url. ex.. `fallbackWidth=700`
+  - Fallback Image is created in same directory as last url.
 - **fallbackFormat**: Format you want fallback image to be. ex.. `fallbackFormat=jpg`
-- **alt** = Screen reader message. ex.. `alt=my image`.
+- **alt** = img element `alt` attribute text. ex.. `alt=my image`.
 - **media** = For Art Direction only. ex.. `(min-width: 900px)`.
 - **sizes** = All responsive images need the `sizes` attribute. default is `100vw`
   - ex.. `100vw` | `(max-width: 320px) 100vw`.
