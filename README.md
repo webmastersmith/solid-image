@@ -86,31 +86,38 @@ This will only create one img/picture element at a time. For art direction you c
    2. The images will be created inside this new folder.
    3. The HTML img/picture element code will be output to console.
 
-## Options
+## URL Options
 
-- **a** = aspect ratio. Crop image from center, to create desired aspect ratio.
-  - If aspect is not provided, output image will be same aspect as input image. ex..`a=16:9`
+- **a** = aspect ratio. Crop image from center, to create desired aspect ratio. ex..`a=16:9`
+  - If aspect is not provided, output image will be same aspect as input image.
   - Image will not be enlarged. Image width will be reduced until aspect ratio 'height' is same size or smaller than original image height.
 - **alt** = img element `alt` attribute text. ex.. `alt=my image`.
-- **animated** = default false. ex.. `animated=true`
+  - default: "This is a image"
+- **animated** = ex.. `animated=true`
+  - default: false.
   - Used with gif, webp, avif. Keep the animation when changing formats.
   - Currently the Sharp library will only convert animated gif's to gif or webp format correctly.
   - Animated gif's to avif format does not work correctly.
 - **c** = className to add to img/picture element. CSS Modules style. ex.. `c=heroImage`
+  - default: pic
 - **f** = format types. Can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
   - Sharp defaults are used if you leave off quality.
   - Gif images: The quality represents the number of colors between 1-256. ex.. `gif:3`
     - original gif image colors are used if you leave quality off.
     - gif will only have 3 colors. This is a good way to reduce gif image size.
 - **fallbackWidth**: width of fallback image. ex.. `fallbackWidth=700`
+  - default: 700px wide.
   - The fallback img aspect will come from the last url.
   - Fallback Image is created in same directory as last url.
 - **fallbackFormat**: format you want fallback image to be. ex.. `fallbackFormat=jpg`
-  - default: 700px wide.
+  - default: jpg.
 - **flatten**: formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
+  - default: false.
 - **flattenColor**: hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
+  - default: black.
 - **media** = Art Direction only. ex.. `media=(min-width: 900px)`.
 - **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
+  - default: false.
 - **sizes** = All responsive images need the `sizes` attribute.
   - default is `100vw`
   - ex.. `sizes=((min-width: 50em) and (max-width: 60em)) 50em, 20em`.
