@@ -126,7 +126,7 @@ export interface SharpDetails {
   desiredHeight: number;
   desiredWidth: number;
   ext: string;
-  fallback: boolean; // internal use
+  _fallback: boolean; // internal use
   fallbackFormat: string; // Format type of fallback image.
   fallbackWidth: number; // boolean as string -default -size of default image.
   flatten: string[];
@@ -214,7 +214,7 @@ export function parseURL(rawUrl: string, urls: any[]) {
     desiredHeight: 0,
     desiredWidth: 0,
     ext,
-    fallback: false,
+    _fallback: false,
     fallbackFormat: o?.fallbackFormat?.[0] ? o.fallbackFormat[0] : 'jpg',
     fallbackWidth: o?.d?.[0] ? +o.d[0] : 700,
     flatten,
@@ -350,7 +350,7 @@ export async function createSources(
         // the last loop will be what the sharpDetails info is.
         sharpDetailsFinal = sharpDetailsFinished;
         // is this a fallback image?
-        if (sharpDetails.fallback) {
+        if (sharpDetails._fallback) {
           return { _sources: [''], sharpDetailsFinal: sharpDetailsFinished };
         }
 
@@ -515,7 +515,7 @@ function findWidthAndHeight(sharpDetails: SharpDetails) {
  */
 export async function createFallbackImage(sharpDetails: SharpDetails): Promise<SharpDetails> {
   // call again for fallback image.
-  sharpDetails.fallback = true;
+  sharpDetails._fallback = true;
   sharpDetails.widths = [sharpDetails.fallbackWidth];
   sharpDetails.formats = [sharpDetails.fallbackFormat];
   const { sharpDetailsFinal } = await createSources(sharpDetails);
