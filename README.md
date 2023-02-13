@@ -11,8 +11,10 @@ Responsive images can be complex and error prone. For instance, if you want reso
 I built this to use with SolidJS library. Until they can get a native image library established.
 Inspired by: [Jonas Kruckenberg: imagetools](https://github.com/JonasKruckenberg/imagetools)
 
-- Unfortunately I could not get his wonderful library to do what I wanted: create static images and code at build time.
-- imagetools embedded JS code at build time, (possibly because I don't know what I'm doing 😁) I wanted the img/picture element without JS.
+- Unfortunately I could not get his wonderful library to do what I wanted: create static images and raw code at develop time.
+- imagetools embedded JS code at build time, (possibly because I don't know what I'm doing 😁)
+  - I wanted the img/picture element without JS. If the img/picture element is not available when the HTMl is loaded, then the browser will download the wrong images.
+  - I could only get the imagetools build output to be JS, which defeats the purpose of responsive images.
 
 ## Understanding Resolutions Switching, Multiple Formats, Art Direction
 
