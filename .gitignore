@@ -1,0 +1,10 @@
+node_modules
+*.gif
+*.jpg
+*.png
+*.webp
+*.avif
+*.svg
+*.tiff
+test*
+package-lock.json

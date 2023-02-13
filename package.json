@@ -1,0 +1,20 @@
+{
+  "name": "image-utils",
+  "version": "1.0.0",
+  "description": "Create images and Picture Element",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "@types/sharp": "^0.31.1"
+  },
+  "dependencies": {
+    "sharp": "^0.31.3"
+  }
+}
