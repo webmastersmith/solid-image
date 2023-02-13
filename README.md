@@ -79,33 +79,33 @@ This will only create one img/picture element at a time. For art direction you c
 
 ## Options
 
-- **w** = width of images. ex.. `w=600;800;1000`
-  - If width is not provided, output image will be same size as input image.
 - **a** = aspect ratio. Crop image from center, to create desired aspect ratio.
   - If aspect is not provided, output image will be same aspect as input image. ex..`a=16:9`
   - Image will not be enlarged. Image width will be reduced until aspect ratio 'height' is same size or smaller than original image height.
+- **alt** = img element `alt` attribute text. ex.. `alt=my image`.
+- **animated** = default false. ex.. `animated=true`
+  - Used with gif, webp, avif. Keep the animation when changing formats.
+  - Currently the Sharp library will only convert animated gif's to gif or webp format correctly.
+  - Animated gif's to avif format does not work correctly.
+- **c** = className to add to img/picture element. CSS Modules style. ex.. `c=heroImage`
 - **f** = format types. Can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
   - Sharp defaults are used if you leave off quality.
   - Gif images: The quality represents the number of colors between 1-256. ex.. `gif:3`
     - original gif image colors are used if you leave quality off.
     - gif will only have 3 colors. This is a good way to reduce gif image size.
-- **flatten**: formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
-- **flattenColor**: hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
-- **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
 - **fallbackWidth**: width of fallback image. ex.. `fallbackWidth=700`
   - The fallback img aspect will come from the last url.
   - Fallback Image is created in same directory as last url.
 - **fallbackFormat**: format you want fallback image to be. ex.. `fallbackFormat=jpg`
   - default: 700px wide.
-- **alt** = img element `alt` attribute text. ex.. `alt=my image`.
+- **flatten**: formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
+- **flattenColor**: hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
 - **media** = Art Direction only. ex.. `(min-width: 900px)`.
+- **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
 - **sizes** = All responsive images need the `sizes` attribute. default is `100vw`
   - ex.. `100vw` | `(max-width: 320px) 100vw`.
-- **c** = className to add to img/picture element. CSS Modules style. ex.. `c=heroImage`
-- **animated** = default false. ex.. `animated=true`
-  - Used with gif, webp, avif. Keep the animation when changing formats.
-  - Currently the Sharp library will only convert animated gif's to gif or webp format correctly.
-  - Animated gif's to avif format does not work correctly.
+- **w** = width of images. ex.. `w=600;800;1000`
+  - If width is not provided, output image will be same size as input image.
 
 ## Examples
 
