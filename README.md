@@ -112,11 +112,12 @@ createImages([
 - **w** = width of images. ex.. `w=600;800;1000`
   - If width is not provided, output image will be same size as input image.
 - **a** = aspect ratio. Crop image from center, to create desired aspect ratio.
-  - Image will not be enlarged. Image width will be reduced until aspect ratio height is same size or smaller than original image. -ex..`a=16:9`
-- **f** = format types. can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
-  - Gif images the quality represents the number of colors between 1-256.
-  - The Sharp library will only convert animated gif's to gif or webp format correctly.
-  - Animated gif's to avif format does not work correctly.
+  - If aspect is not provided, output image will be same aspect as input image. ex..`a=16:9`
+  - Image will not be enlarged. Image width will be reduced until aspect ratio 'height' is same size or smaller than original image height.
+- **f** = format types. Can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
+  - Sharp defaults are used if you leave off quality.
+  - Gif images: The quality represents the number of colors between 1-256. ex.. `gif:3`
+    - gif will only have 3 colors. This is a good way to reduce gif image size.
 - **flatten**: formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
 - **flattenColor**: hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
 - **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
@@ -129,4 +130,8 @@ createImages([
 - **sizes** = All responsive images need the `sizes` attribute. default is `100vw`
   - ex.. `100vw` | `(max-width: 320px) 100vw`.
 - **c** = className to add to img/picture element. CSS Modules style.
-- **animated** = default false. Used with gif, webp, avif. Keep the animation when changing formats. Currently Sharp only supports gif and webp.
+- **animated** = default false. Used with gif, webp, avif. Keep the animation when changing formats.
+  - Currently the Sharp library will only convert animated gif's to gif or webp format correctly.
+  - Animated gif's to avif format does not work correctly.
+
+## Output HTML Code
