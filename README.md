@@ -144,18 +144,40 @@ createImages([
 
 - single url
 - single format
-- mutiple widths
+- multiple widths
 
 **createImages.ts**
 
 ```ts
-
+await createImages([
+  [
+    'public/header/logo/bolt.gif',
+    'w=25;55',
+    'f=gif:4',
+    'animated=true',
+    'sizes=62px',
+    'c=bolt',
+    'alt=lighting bolt image',
+  ],
+]);
 ```
 
 **YourComponent.tsx**
 
 ```tsx
+import styles from './Logo.module.scss';
 
+export default function Logo(props: any) {
+  return (
+    <img
+      srcset="/header/logo/bolt/bolt_2-3_25x37.gif 25w, /header/logo/bolt/bolt_2-3_55x81.gif 55w"
+      sizes="62px"
+      src="/header/logo/bolt/bolt_2-3_55x81.gif"
+      alt="lighting bolt image"
+      class={styles.bolt}
+    />
+  );
+}
 ```
 
 ### Multiple Formats
