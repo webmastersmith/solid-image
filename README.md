@@ -156,7 +156,7 @@ createImages([
 ])
 ```
 
-### Resolution Switching
+### Resolution Switching Example
 
 - single url
 - single format
@@ -196,7 +196,7 @@ export default function Logo(props: any) {
 }
 ```
 
-### Multiple Formats
+### Multiple Formats Example
 
 - single url
 - multiple formats
@@ -246,7 +246,7 @@ export default function TexasImage() {
 }
 ```
 
-### Art Direction
+### Art Direction Example
 
 - multiple urls
 - multiple image formats
