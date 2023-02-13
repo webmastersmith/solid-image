@@ -2,50 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
-// npm i -D sharp  // not needed in production.
-// npm i -D @types/sharp // not needed in production.
-
-/**
- * Create images and picture element or img element with srcset attribute.
- * RESOLUTION SWITCHING: only one url and one format. Usually jpg format.
- * PICTURE ELEMENT
- * Multiple Formats: Do not include media queries. Provide multiple formats. ex.. f=avif,webp,jpg
- * Art Direction: provide at least two urls. Must have media queries on urls.
- *
- * ex...'hero.jpg?w=300;600;900&&f=avif:50;jpg;webp:80;png:50&sharpen=true&d=500&alt=The dog and the Cat'
- *
- * w = width of images. ex.. w=600;800;1000
- *
- * a = aspectRatio, string, -ex..'a=16:9'
- *
- * f = string[] -format:quality  ex.. avif:50, webp:80, jpg, png:100. Gif images the quality is 1-256. It represents the number of colors. Leave of number to use the same amount as original image. Currently you can only convert to gif or webp. Avif does not work correctly. Online gif to avif convert to mp4 video.
- *
- * flatten: semi-colon separated list of formats you want flattened.
- * flattenColor: hex color code. You can add the background color for image transparent regions. ex.. flatten=FFFFFF
- *
- * sharpen = boolean -sharpen image. Increases the image size. ex.. sharpen=true
- *
- * fallbackWidth: number. Fallback image width for the 'img' element. The fallback img aspect will come from the last url. Image is created in same directory as last url.  ex.. fallbackWidth=700
- *
- * fallbackFormat: string. Format you want fallback image to be.
- *
- * alt = string. Screen reader message. ex.. alt=Hello World.
- *
- * media = (min-width: 900px) | you can leave blank.
- *
- * sizes = string. ex.. 100vw | (max-width: 320px) 100vw, (max-width: 600px) 50vw, 25vw | blank.
- *
- * c = string. The 'class' name you want to call your img. CSS Modules style. The 'class' name comes from the last url provided.
- *
- * animated = boolean. default false.
- */
-
 (async function () {
   await createImages('your image url here');
 })();
 
 /**
- * During development, create images, and console.log picture element webpage data.
+ * During development, create images, and console.log img/picture element.
  * @param urls string[] of urls.
  * @returns void
  */
@@ -63,6 +25,7 @@ async function createImages(urls: string | string[] | string[][]): Promise<void>
     // 1. create/write image for each url, return state to build html img/picture element.
     const sources: string[][] = [];
     const sharpDetails = parseURL(urlParams, urls); // details object
+    // get original image width, height and metadata format.
     const {
       width = 0,
       height = 0,

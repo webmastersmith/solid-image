@@ -100,10 +100,11 @@ This will only create one img/picture element at a time. For art direction you c
   - default: 700px wide.
 - **flatten**: formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
 - **flattenColor**: hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
-- **media** = Art Direction only. ex.. `(min-width: 900px)`.
+- **media** = Art Direction only. ex.. `media=(min-width: 900px)`.
 - **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
-- **sizes** = All responsive images need the `sizes` attribute. default is `100vw`
-  - ex.. `100vw` | `(max-width: 320px) 100vw`.
+- **sizes** = All responsive images need the `sizes` attribute.
+  - default is `100vw`
+  - ex.. `sizes=((min-width: 50em) and (max-width: 60em)) 50em, 20em`.
 - **w** = width of images. ex.. `w=600;800;1000`
   - If width is not provided, output image will be same size as input image.
 
@@ -152,6 +153,7 @@ createImages([
 ### Multiple Formats
 
 ```ts
+// w=300. Original image is 265w x 253h. Image will not be enlarged. Output will be same size as image.
 await createImages(
   'public/header/texasFlag.png?w=100;200;300&f=png;avif;webp&fallbackWidth=100&alt=Image of Texas Flag&sizes=100px&c=texasImage&sharpen=true'
 );
