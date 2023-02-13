@@ -12,7 +12,7 @@ I built this to use with SolidJS library. Until they can get a native image libr
 Inspired by: [Jonas Kruckenberg: imagetools](https://github.com/JonasKruckenberg/imagetools)
 
 - Unfortunately I could not get his wonderful library to do what I wanted: create static images and code at build time.
-- imagetools embedded JS code at build time, (possibly because I don't know what I'm doing :-) ) I wanted the img/picture element without JS.
+- imagetools embedded JS code at build time, (possibly because I don't know what I'm doing 😁) I wanted the img/picture element without JS.
 
 ## Understanding Resolutions Switching, Multiple Formats, Art Direction
 
