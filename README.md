@@ -165,7 +165,12 @@ createImages([
 **createImages.ts**
 
 ```ts
+await createImages(
+  'public/header/logo/bolt.gif?w=25;55&f=gif:4&animated=true&sizes=62px&c=bolt&alt=lighting bolt image'
+);
+// or
 await createImages([
+  //must be nested array.
   [
     'public/header/logo/bolt.gif',
     'w=25;55',
