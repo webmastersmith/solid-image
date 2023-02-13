@@ -109,28 +109,24 @@ createImages([
 
 ## Options
 
-- w = width of images. ex.. `w=600;800;1000`
-- a = aspect ratio. Image will not be enlarged. Image width will be reduced until aspect ratio height is same size or smaller than original image. -ex..`a=16:9`
-- f = format types. can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
+- **w** = width of images. ex.. `w=600;800;1000`
+  - If width is not provided, output image will be same size as input image.
+- **a** = aspect ratio. Crop image from center, to create desired aspect ratio.
+  - Image will not be enlarged. Image width will be reduced until aspect ratio height is same size or smaller than original image. -ex..`a=16:9`
+- **f** = format types. can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
   - Gif images the quality represents the number of colors between 1-256.
   - The Sharp library will only convert animated gif's to gif or webp format correctly.
   - Animated gif's to avif format does not work correctly.
-- flatten: semi-colon separated list of formats you want flattened.
-- flattenColor: hex color code. You can add the background color for image transparent regions. ex.. flatten=FFFFFF
--
-- sharpen = boolean -sharpen image. Increases the image size. ex.. sharpen=true
--
-- fallbackWidth: number. Fallback image width for the 'img' element. The fallback img aspect will come from the last url. Image is created in same directory as last url. ex.. fallbackWidth=700
--
-- fallbackFormat: string. Format you want fallback image to be.
--
-- alt = string. Screen reader message. ex.. alt=Hello World.
--
-- media = (min-width: 900px) | you can leave blank.
--
-- sizes = string. ex.. 100vw | (max-width: 320px) 100vw, (max-width: 600px) 50vw, 25vw | blank.
--
-- c = string. The 'class' name you want to call your img. CSS Modules style. The 'class' name comes from the last url provided.
--
-- animated = boolean. default false.
-  \*/
+- **flatten**: formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
+- **flattenColor**: hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
+- **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
+- **fallbackWidth**: Width of fallback image.
+  - The fallback img aspect will come from the last url.
+  - Fallback Image is created in same directory as last url. ex.. `fallbackWidth=700`
+- **fallbackFormat**: Format you want fallback image to be. ex.. `fallbackFormat=jpg`
+- **alt** = Screen reader message. ex.. `alt=my image`.
+- **media** = For Art Direction only. ex.. `(min-width: 900px)`.
+- **sizes** = All responsive images need the `sizes` attribute. default is `100vw`
+  - ex.. `100vw` | `(max-width: 320px) 100vw`.
+- **c** = className to add to img/picture element. CSS Modules style.
+- **animated** = default false. Used with gif, webp, avif. Keep the animation when changing formats. Currently Sharp only supports gif and webp.
