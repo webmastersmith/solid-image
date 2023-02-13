@@ -216,7 +216,7 @@ export function parseURL(rawUrl: string, urls: any[]) {
     ext,
     _fallback: false,
     fallbackFormat: o?.fallbackFormat?.[0] ? o.fallbackFormat[0] : 'jpg',
-    fallbackWidth: o?.d?.[0] ? +o.d[0] : 700,
+    fallbackWidth: o?.fallbackFormat?.[0] ? +o.fallbackFormat[0] : 700,
     flatten,
     flattenColor: o?.flattenColor?.[0] ? o.flattenColor[0] : '',
     folderPath: '',

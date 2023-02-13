@@ -8,7 +8,7 @@ With url or array syntax, you can quickly make responsive images, and the HTML i
 
 Responsive images can be complex and error prone. For instance, if you want resolution switching, `<img srcset="..."` and you accidentally forget the [`sizes` attribute, the browser will ignore `srcset` and use the fallback `src` attribute.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset) The `media` attribute [should only be used with Art Direction.](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images#art_direction) There are many more small "gotcha's" that can be avoided by automation.
 
-### Understanding Resolutions Switching, Multiple Formats, Art Direction
+## Understanding Resolutions Switching, Multiple Formats, Art Direction
 
 **Resolution Switching**
 
@@ -117,6 +117,7 @@ createImages([
 - **f** = format types. Can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
   - Sharp defaults are used if you leave off quality.
   - Gif images: The quality represents the number of colors between 1-256. ex.. `gif:3`
+    - original gif image colors are used if you leave quality off.
     - gif will only have 3 colors. This is a good way to reduce gif image size.
 - **flatten**: formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
 - **flattenColor**: hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
@@ -124,14 +125,153 @@ createImages([
 - **fallbackWidth**: width of fallback image. ex.. `fallbackWidth=700`
   - The fallback img aspect will come from the last url.
   - Fallback Image is created in same directory as last url.
-- **fallbackFormat**: Format you want fallback image to be. ex.. `fallbackFormat=jpg`
+- **fallbackFormat**: format you want fallback image to be. ex.. `fallbackFormat=jpg`
+  - default: 700px wide.
 - **alt** = img element `alt` attribute text. ex.. `alt=my image`.
-- **media** = For Art Direction only. ex.. `(min-width: 900px)`.
+- **media** = Art Direction only. ex.. `(min-width: 900px)`.
 - **sizes** = All responsive images need the `sizes` attribute. default is `100vw`
   - ex.. `100vw` | `(max-width: 320px) 100vw`.
-- **c** = className to add to img/picture element. CSS Modules style.
-- **animated** = default false. Used with gif, webp, avif. Keep the animation when changing formats.
+- **c** = className to add to img/picture element. CSS Modules style. ex.. `c=heroImage`
+- **animated** = default false. ex.. `animated=true`
+  - Used with gif, webp, avif. Keep the animation when changing formats.
   - Currently the Sharp library will only convert animated gif's to gif or webp format correctly.
   - Animated gif's to avif format does not work correctly.
 
-## Output HTML Code
+## Examples
+
+### Resolution Switching
+
+```ts
+
+```
+
+```tsx
+
+```
+
+### Multiple Formats
+
+```ts
+await createImages(
+  'public/header/texasFlag.png?w=100;200;300&f=png;avif;webp&d=100&alt=Image of Texas Flag&sizes=100px&c=backup&c=texasImage&sharpen=true'
+);
+```
+
+```tsx
+import styles from './TexasImage.module.scss';
+
+export default function TexasImage() {
+  return (
+    <picture class={styles.texasImage}>
+      <source
+        type="image/avif"
+        srcset="/header/texasFlag/texasFlag_20-19_100x95.avif 100w, /header/texasFlag/texasFlag_22-21_200x191.avif 200w, /header/texasFlag/texasFlag_22-21_265x253.avif 265w"
+        sizes="100px"
+      />
+      <source
+        type="image/webp"
+        srcset="/header/texasFlag/texasFlag_20-19_100x95.webp 100w, /header/texasFlag/texasFlag_22-21_200x191.webp 200w, /header/texasFlag/texasFlag_22-21_265x253.webp 265w"
+        sizes="100px"
+      />
+      <source
+        type="image/png"
+        srcset="/header/texasFlag/texasFlag_20-19_100x95.png 100w, /header/texasFlag/texasFlag_22-21_200x191.png 200w, /header/texasFlag/texasFlag_22-21_265x253.png 265w"
+        sizes="100px"
+      />
+      <img
+        src="/header/texasFlag/texasFlag_20-19_100x95.png"
+        width="100"
+        height="95"
+        alt="Image of Texas Flag"
+        class={styles.texasImage}
+      />
+    </picture>
+  );
+}
+```
+
+### Art Direction
+
+```ts
+await createImages([
+  [
+    'public/hero/hero-full.jpg',
+    'w=600;800;1200;2400',
+    'a=9:16',
+    'f=avif;webp;jpg',
+    'fallbackWidth=700',
+    'fallbackFormat=jpg',
+    'alt=Image of house and pool with custom lighting',
+    'sizes=100vw',
+    'c=heroImage',
+    'media=(max-width: 600px)',
+  ],
+
+  [
+    'public/hero/hero.jpg',
+    'w=600;800;1200;2400',
+    'a=16:9',
+    'f=avif;webp;jpg',
+    'fallbackWidth=700',
+    'fallbackFormat=jpg',
+    'alt=Image of house and pool with custom lighting',
+    'sizes=100vw',
+    'c=heroImage',
+    'media=(min-width: 601px)',
+    'sharpen=true',
+  ],
+]);
+```
+
+```tsx
+// use the provide code.
+export default function HeroImage() {
+  return (
+    <picture class={styles.heroImage}>
+      <source
+        type="image/avif"
+        srcset="/hero/hero-full/hero-full_9-16_600x1067.avif 600w, /hero/hero-full/hero-full_9-16_800x1422.avif 800w, /hero/hero-full/hero-full_9-16_900x1600.avif 900w"
+        sizes="100vw"
+        media="(max-width: 600px)"
+      />
+      <source
+        type="image/webp"
+        srcset="/hero/hero-full/hero-full_9-16_600x1067.webp 600w, /hero/hero-full/hero-full_9-16_800x1422.webp 800w, /hero/hero-full/hero-full_9-16_900x1600.webp 900w"
+        sizes="100vw"
+        media="(max-width: 600px)"
+      />
+      <source
+        type="image/jpg"
+        srcset="/hero/hero-full/hero-full_9-16_600x1067.jpg 600w, /hero/hero-full/hero-full_9-16_800x1422.jpg 800w, /hero/hero-full/hero-full_9-16_900x1600.jpg 900w"
+        sizes="100vw"
+        media="(max-width: 600px)"
+      />
+      <source
+        type="image/avif"
+        srcset="/hero/hero/hero_16-9_600x338.avif 600w, /hero/hero/hero_16-9_800x450.avif 800w, /hero/hero/hero_16-9_1200x675.avif 1200w, /hero/hero/hero_16-9_2400x1350.avif 2400w"
+        sizes="100vw"
+        media="(min-width: 601px)"
+      />
+      <source
+        type="image/webp"
+        srcset="/hero/hero/hero_16-9_600x338.webp 600w, /hero/hero/hero_16-9_800x450.webp 800w, /hero/hero/hero_16-9_1200x675.webp 1200w, /hero/hero/hero_16-9_2400x1350.webp 2400w"
+        sizes="100vw"
+        media="(min-width: 601px)"
+      />
+      <source
+        type="image/jpg"
+        srcset="/hero/hero/hero_16-9_600x338.jpg 600w, /hero/hero/hero_16-9_800x450.jpg 800w, /hero/hero/hero_16-9_1200x675.jpg 1200w, /hero/hero/hero_16-9_2400x1350.jpg 2400w"
+        sizes="100vw"
+        media="(min-width: 601px)"
+      />
+      <img
+        src="/hero/hero/hero_16-9_700x394.jpg"
+        width="700"
+        height="394"
+        alt="Image of house and pool with custom lighting"
+        class={styles.heroImage}
+      />
+    </picture>
+  );
+}
+```
