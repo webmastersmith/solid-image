@@ -2,7 +2,7 @@
 
 ### What it does?
 
-With url or array syntax, you can quickly make responsive images, and the HTML img|picture element code will be output to the console. Library agnostic.
+With url or array syntax, you can quickly make responsive images, and the HTML img/picture element code will be output to the console. Library agnostic.
 
 ### Why
 
@@ -42,6 +42,30 @@ Responsive images can be complex and error prone. For instance, if you want reso
 </picture>
 ```
 
+**Art Direction**
+
+- uses the `picture` element.
+- **Pros**
+  - Switch image based on different devices screen size.
+  - Can also use multiple formats.
+- **Cons**
+  - This can be the most complex code.
+  - order matters. Browser takes the first truthy value.
+  - must use the `media` attribute.
+
+```html
+<!-- browser takes first format it understands and first truthy media condition  -->
+<picture>
+  <!-- aspect ratio 9:16 -->
+  <source media="(max-width: 799px)" type="image/avif" srcset="image-1_aspect_9-16.avif w500" />
+  <source media="(max-width: 799px)" type="image/jpg" srcset="image-1_aspect_9-16.jpg w500" />
+  <!-- aspect ratio 16:9 -->
+  <source media="(min-width: 800px)" type="image/avif" srcset="image-1_aspect_16-9.avif w500" />
+  <source media="(min-width: 800px)" type="image/jpg" srcset="image-1_aspect_16-9.jpg w500" />
+  <img src="image.jpg" alt="my image" />
+</picture>
+```
+
 ### How to use it
 
 This will only create one img/picture element at a time. For art direction you can use multiple urls and the media attribute.
@@ -56,27 +80,41 @@ This will only create one img/picture element at a time. For art direction you c
 ## URL Examples
 
 ```ts
-createImages('public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true');
+createImages('public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image');
+// or
+createImages([
+  'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image'
+  'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image'
+])
+// or
+createImages([
+  [
+    'public/hero/hero.jpg', // first item must be image path.
+    'a=9:16',
+    'w=300;600;900',
+    'f=avif;webp;jpg',
+    'sharpen=true'
+    'alt=my image',
+  ],
+  [
+    'public/hero/hero.jpg', // can be same image, different aspectRatio or different image.
+    'a=16:9',
+    'w=300;600;900',
+    'f=avif;webp;jpg',
+    'sharpen=true'
+    'alt=my image',
+  ]
+])
 ```
 
 ## Options
 
-/\*\*
-
-- Create images and picture element or img element with srcset attribute.
-- RESOLUTION SWITCHING: only one url and one format. Usually jpg format.
-- PICTURE ELEMENT
-- Multiple Formats: Do not include media queries. Provide multiple formats. ex.. f=avif,webp,jpg
-- Art Direction: provide at least two urls. Must have media queries on urls.
--
-- ex...'hero.jpg?w=300;600;900&&f=avif:50;jpg;webp:80;png:50&sharpen=true&d=500&alt=The dog and the Cat'
--
-- w = width of images. ex.. w=600;800;1000
--
-- a = aspectRatio, string, -ex..'a=16:9'
--
-- f = string[] -format:quality ex.. avif:50, webp:80, jpg, png:100. Gif images the quality is 1-256. It represents the number of colors. Leave of number to use the same amount as original image. Currently you can only convert to gif or webp. Avif does not work correctly. Online gif to avif convert to mp4 video.
--
+- w = width of images. ex.. `w=600;800;1000`
+- a = aspect ratio. Image will not be enlarged. Image width will be reduced until aspect ratio height is same size or smaller than original image. -ex..`a=16:9`
+- f = format types. can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
+  - Gif images the quality represents the number of colors between 1-256.
+  - The Sharp library will only convert animated gif's to gif or webp format correctly.
+  - Animated gif's to avif format does not work correctly.
 - flatten: semi-colon separated list of formats you want flattened.
 - flattenColor: hex color code. You can add the background color for image transparent regions. ex.. flatten=FFFFFF
 -
