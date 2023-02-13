@@ -11,7 +11,7 @@ import sharp from 'sharp';
  * @param urls string[] of urls.
  * @returns void
  */
-async function createImages(urls: string | string[] | string[][]): Promise<void> {
+export async function createImages(urls: string | string[] | string[][]): Promise<void> {
   // make sure url is an array.
   if (!Array.isArray(urls)) urls = [urls];
   for (let [i, urlParams] of urls.entries()) {

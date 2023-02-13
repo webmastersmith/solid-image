@@ -8,7 +8,7 @@ With url or array syntax, you can quickly make responsive images, and the HTML i
 
 Responsive images can be complex and error prone. For instance, if you want resolution switching, `<img srcset="..."` and you accidentally forget the [`sizes` attribute, the browser will ignore `srcset` and use the fallback `src` attribute.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset) The `media` attribute [should only be used with Art Direction.](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images#art_direction) There are many more small "gotcha's" that can be avoided by automation.
 
-I built this to use with SolidJS library. Until they can get a native image library established.
+I built this to use with SolidStart meta framework. Until they can get a native image library established.
 Inspired by: [Jonas Kruckenberg: imagetools](https://github.com/JonasKruckenberg/imagetools)
 
 - Unfortunately I could not get his wonderful library to do what I wanted: create static images and raw code at develop time.
@@ -74,7 +74,7 @@ Inspired by: [Jonas Kruckenberg: imagetools](https://github.com/JonasKruckenberg
 </picture>
 ```
 
-### How to use it
+### Run:
 
 This will only create one img/picture element at a time. For art direction you can use multiple urls and the media attribute.
 

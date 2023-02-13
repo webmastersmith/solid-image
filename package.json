@@ -1,8 +1,8 @@
 {
-  "name": "image-utils",
-  "version": "1.0.0",
-  "description": "Create images and Picture Element",
-  "main": "index.ts",
+  "name": "@webmastersmith/solid-images",
+  "version": "0.0.1",
+  "description": "Use the Sharp Library to quickly create images HTML code",
+  "main": "createImages.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
