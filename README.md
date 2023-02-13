@@ -77,36 +77,6 @@ This will only create one img/picture element at a time. For art direction you c
 4. Run command: `ts-node-esm createImages.ts`
 5. The output html code image path will be for the public directory.
 
-## URL Examples
-
-```ts
-createImages('public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image');
-// or
-createImages([
-  'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image'
-  'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image'
-])
-// or
-createImages([
-  [
-    'public/hero/hero.jpg', // first item must be image path.
-    'a=9:16',
-    'w=300;600;900',
-    'f=avif;webp;jpg',
-    'sharpen=true'
-    'alt=my image',
-  ],
-  [
-    'public/hero/hero.jpg', // can be same image, different aspectRatio or different image.
-    'a=16:9',
-    'w=300;600;900',
-    'f=avif;webp;jpg',
-    'sharpen=true'
-    'alt=my image',
-  ]
-])
-```
-
 ## Options
 
 - **w** = width of images. ex.. `w=600;800;1000`
@@ -139,6 +109,36 @@ createImages([
 
 ## Examples
 
+### URL Examples
+
+```ts
+createImages('public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image');
+// or
+createImages([
+  'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image'
+  'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image'
+])
+// or
+createImages([
+  [
+    'public/hero/hero.jpg', // first item must be image path.
+    'a=9:16',
+    'w=300;600;900',
+    'f=avif;webp;jpg',
+    'sharpen=true'
+    'alt=my image',
+  ],
+  [
+    'public/hero/hero.jpg', // can be same image, different aspectRatio or different image.
+    'a=16:9',
+    'w=300;600;900',
+    'f=avif;webp;jpg',
+    'sharpen=true'
+    'alt=my image',
+  ]
+])
+```
+
 ### Resolution Switching
 
 ```ts
@@ -153,7 +153,7 @@ createImages([
 
 ```ts
 await createImages(
-  'public/header/texasFlag.png?w=100;200;300&f=png;avif;webp&d=100&alt=Image of Texas Flag&sizes=100px&c=backup&c=texasImage&sharpen=true'
+  'public/header/texasFlag.png?w=100;200;300&f=png;avif;webp&fallbackWidth=100&alt=Image of Texas Flag&sizes=100px&c=texasImage&sharpen=true'
 );
 ```
 
@@ -224,7 +224,8 @@ await createImages([
 ```
 
 ```tsx
-// use the provide code.
+import styles from './HeroImage.module.scss';
+
 export default function HeroImage() {
   return (
     <picture class={styles.heroImage}>
