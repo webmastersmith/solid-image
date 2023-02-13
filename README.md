@@ -81,7 +81,10 @@ This will only create one img/picture element at a time. For art direction you c
 2. Copy **createImages.ts** to your `public` or `root` directory.
 3. Create `url paths`. (See URL Examples).
 4. Run command: `ts-node-esm createImages.ts`
-5. The images will be created in the public directory. The HTML img/picture element code will be output to console.
+5. The images will be created in the same directory the source image is in.
+   1. A folder will be created with the same name as the image.
+   2. The images will be created inside this new folder.
+   3. The HTML img/picture element code will be output to console.
 
 ## Options
 
