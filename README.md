@@ -22,7 +22,7 @@ This will only create one img/picture element at a time. For art direction you c
 
 1. Install
    1. `npm i -D solid-image`
-2. Create a Javascript file in `root` directory. ex.. `touch images.js`
+2. Create a Javascript file in the `root` directory. ex.. `images.js`
 3. Add the following code.
 
 ```js
