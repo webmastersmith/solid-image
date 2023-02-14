@@ -137,6 +137,8 @@ createImages('see url examples below 👇');
 
 ### URL Examples
 
+**YourFileName.js**
+
 ```ts
 import createImages from 'solid-image';
 
@@ -173,9 +175,9 @@ createImages([
 - single format
 - multiple widths
 
-**createImages.ts**
+**YourFileName.js**
 
-```ts
+```js
 import createImages from 'solid-image';
 createImages(
   'public/header/logo/bolt.gif?w=25;55&f=gif:4&animated=true&sizes=62px&c=bolt&alt=lighting bolt image'
@@ -219,9 +221,9 @@ export default function Logo(props: any) {
 - multiple formats
 - mutiple widths
 
-**createImages.ts**
+**YourFileName.js**
 
-```ts
+```js
 import createImages from 'solid-image';
 // w=300. Original image is 265w x 253h. Image will not be enlarged. Output will be same size as image.
 createImages(
@@ -270,9 +272,9 @@ export default function TexasImage() {
 - multiple image formats
 - multiple widths
 
-**createImages.ts**
+**YourFileName.js**
 
-```ts
+```js
 import createImages from 'solid-image';
 createImages([
   [
