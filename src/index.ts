@@ -1,7 +1,10 @@
-import { updateUrlParams, parseURL, getMetadata } from './utils.js';
 import createSources from './createSources.js';
 import createFallbackImage from './createFallbackImage.js';
 import resolutionSwitching from './resolutionSwitching.js';
+import sharp from 'sharp';
+import { updateUrlParams, parseURL, getMetadata, progressBar } from './utils.js';
+//@ts-ignore
+import ProgressBar from 'console-progress-bar';
 
 /**
  * During development, create images, and console.log img/picture element.
@@ -12,7 +15,12 @@ export default async function createImages(urls: string | string[] | string[][])
   // modify url to path[] format.
   const urlPaths = updateUrlParams(urls);
 
-  // console.log(process.argv.slice(2));
+  // progress bar.
+  const barNum = progressBar(urlPaths);
+  const bar = new ProgressBar({ maxValue: barNum });
+  sharp.queue.on('change', function (queueLength) {
+    bar.addValue(1);
+  });
 
   const sources: string[][] = [];
   // loop all the urls

@@ -1,9 +1,8 @@
-import fs from 'fs';
 import path from 'path';
-import sharp, { Sharp } from 'sharp';
-import { SharpDetails } from './types.js';
+import sharp from 'sharp';
+import { SharpDetails, URLS } from './types.js';
 
-export function updateUrlParams(urls: string | string[] | string[][]): string[] {
+export function updateUrlParams(urls: URLS): string[] {
   let urlPaths = [];
   // make sure single url is an array.
   if (!Array.isArray(urls)) urls = [urls];
@@ -21,6 +20,47 @@ export function updateUrlParams(urls: string | string[] | string[][]): string[] 
 
   // return an array of urlPaths.
   return urlPaths;
+}
+
+export function progressBar(urls: string[]): number {
+  let imgNum = 1;
+
+  // count images
+  for (const rawUrl of urls) {
+    const urlPath = new URL(rawUrl, 'file://');
+    // parse url into array of tuples.
+    const arr: Array<[string, string[]]> = [];
+    for (const [key, value] of urlPath.searchParams) {
+      arr.push([key, value.split(';')]);
+    }
+    // convert array into object.
+    const o = Object.fromEntries(arr) as any;
+    // remove accidental semi-colon on end.
+    let w: number[] = [];
+    if (o?.w && o?.w?.length !== 0) {
+      for (const width of o.w) {
+        if (+width) {
+          w.push(+width);
+        }
+      }
+    } else {
+      w = [0];
+    }
+    // remove accidental semi-colon on end.
+    let f: string[] = [];
+    if (o?.f && o?.f.length !== 0) {
+      for (const format of o.f) {
+        if (format) {
+          f.push(format);
+        }
+      }
+    } else {
+      f = [''];
+    }
+    imgNum += w.length * f.length;
+  }
+  // sharp change happens twice per image.
+  return imgNum * 2;
 }
 
 /**

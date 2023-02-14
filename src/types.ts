@@ -32,3 +32,5 @@ export interface SharpDetails {
   widths: number[];
   writePath: string;
 }
+
+export type URLS = string | string[] | string[][];
