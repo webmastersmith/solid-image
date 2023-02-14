@@ -112,7 +112,7 @@ createImages('see url examples below 👇');
 - **debug** = print to console state after each image creation.
   - default: false.
 - **enlarge** = allow image size to grow beyond original image size to create desired aspect ratio or desired width.
-  - default: false.
+  - default: true.
 - **f** = format types. Can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
   - Sharp defaults are used if you leave off quality. ex.. `f=avif;webp;jpg`
   - Gif images: The quality represents the number of colors between 1-256. ex.. `gif:3`

@@ -127,7 +127,7 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
     desiredAspect: o?.a?.[0] ? o.a[0] : '',
     desiredHeight: 0,
     desiredWidth: 0,
-    enlarge: o?.enlarge?.[0] === 'true' ? true : false,
+    enlarge: o?.enlarge?.[0] === 'false' ? false : true,
     ext,
     _fallback: false, // internal use.
     fallbackFormat: o?.fallbackFormat?.[0] ? o.fallbackFormat[0] : 'jpg',
