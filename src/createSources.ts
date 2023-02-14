@@ -1,6 +1,6 @@
-import { SharpDetails } from './types';
-import { findWidthAndHeight } from './utils';
-import createSrcset from './createSrcset';
+import { SharpDetails } from './types.js';
+import { findWidthAndHeight } from './utils.js';
+import createSrcset from './createSrcset.js';
 /**
  * Creates the 'source' element and calls all formats/sizes provide from url params.
  * @param _img instance of sharp image.

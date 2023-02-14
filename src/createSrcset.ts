@@ -1,8 +1,8 @@
 import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
-import { SharpDetails } from './types';
-import { createPaths } from './utils';
+import { SharpDetails } from './types.js';
+import { createPaths } from './utils.js';
 
 /**
  * create/write images to folder. Return srcset values.

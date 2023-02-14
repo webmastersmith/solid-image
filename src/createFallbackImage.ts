@@ -1,5 +1,5 @@
-import createSources from './createSources';
-import { SharpDetails } from './types';
+import createSources from './createSources.js';
+import { SharpDetails } from './types.js';
 /**
  * Create default image w/ provided default value and aspectRatio.
  * @param _img instantiated Sharp image.

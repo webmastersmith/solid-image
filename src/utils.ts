@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import sharp, { Sharp } from 'sharp';
-import { SharpDetails } from './types';
+import { SharpDetails } from './types.js';
 
 export function updateUrlParams(urls: string | string[] | string[][]): string[] {
   let urlPaths = [];

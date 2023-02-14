@@ -1,7 +1,7 @@
-import { updateUrlParams, parseURL, getMetadata } from './src/utils';
-import createSources from './src/createSources';
-import createFallbackImage from './src/createFallbackImage';
-import resolutionSwitching from './src/resolutionSwitching';
+import { updateUrlParams, parseURL, getMetadata } from './utils.js';
+import createSources from './createSources.js';
+import createFallbackImage from './createFallbackImage.js';
+import resolutionSwitching from './resolutionSwitching.js';
 
 /**
  * During development, create images, and console.log img/picture element.

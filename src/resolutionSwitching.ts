@@ -1,6 +1,6 @@
-import createSources from './createSources';
-import createFallbackImage from './createFallbackImage';
-import { SharpDetails } from './types';
+import createSources from './createSources.js';
+import createFallbackImage from './createFallbackImage.js';
+import { SharpDetails } from './types.js';
 
 export default async function resolutionSwitching(sharpDetails: SharpDetails) {
   // Resolution Switching _sources is an array of 'srcset' strings.
