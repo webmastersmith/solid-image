@@ -174,6 +174,7 @@ createImages([
 **createImages.ts**
 
 ```ts
+import createImages from 'solid-image';
 createImages(
   'public/header/logo/bolt.gif?w=25;55&f=gif:4&animated=true&sizes=62px&c=bolt&alt=lighting bolt image'
 );
@@ -219,6 +220,7 @@ export default function Logo(props: any) {
 **createImages.ts**
 
 ```ts
+import createImages from 'solid-image';
 // w=300. Original image is 265w x 253h. Image will not be enlarged. Output will be same size as image.
 createImages(
   'public/header/texasFlag.png?w=100;200;300&f=png;avif;webp&fallbackWidth=100&alt=Image of Texas Flag&sizes=100px&c=texasImage&sharpen=true'
@@ -269,6 +271,7 @@ export default function TexasImage() {
 **createImages.ts**
 
 ```ts
+import createImages from 'solid-image';
 createImages([
   [
     'public/hero/hero-full.jpg',
