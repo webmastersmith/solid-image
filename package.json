@@ -1,11 +1,15 @@
 {
   "name": "solid-image",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Use the Sharp Library to quickly create images and HTML code",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -fr dist/* && tsc"
+    "build": "rm -fr dist/* && tsc",
+    "prepublish": "npm run build",
+    "publish": "npm version patch && npm publish",
+    "dry": "npm publish --dry-run"
   },
   "keywords": [],
   "author": "Bryon Smith",
@@ -16,5 +20,9 @@
   },
   "dependencies": {
     "sharp": "^0.31.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webmastersmith/solid-images"
   }
 }
