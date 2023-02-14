@@ -13,7 +13,7 @@ export default async function resolutionSwitching(sharpDetails: SharpDetails) {
   const img = `<img srcset="${_sources.join(', ')}" sizes="${sharpDetailsFinal.sizes}" src="${
     sharpDetailsFinal.srcPath
   }" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} loading="${
-    sharpDetailsFinal.lazy
+    sharpDetailsFinal.loading
   }"/>`;
   console.log(img);
   return;

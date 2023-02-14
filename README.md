@@ -114,7 +114,7 @@ createImages('see url examples below 👇');
 - **enlarge** = allow image size to grow beyond original image size to create desired aspect ratio or desired width.
   - default: false.
 - **f** = format types. Can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
-  - Sharp defaults are used if you leave off quality.
+  - Sharp defaults are used if you leave off quality. ex.. `f=avif;webp;jpg`
   - Gif images: The quality represents the number of colors between 1-256. ex.. `gif:3`
     - original gif image colors are used if you leave quality off.
     - gif will only have 3 colors. This is a good way to reduce gif image size.
@@ -128,8 +128,8 @@ createImages('see url examples below 👇');
   - default: ''. // empty.
 - **flattenColor** = hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
   - default: black.
-- **lazy** = image loading attribute. ex.. `lazy=false` // loading='eager'.
-  - default: true
+- **loading** = image loading attribute. Two options: 'eager' | 'lazy' ex.. `loading=eager`.
+  - default: 'lazy'.
 - **media** = Art Direction only. ex.. `media=(min-width: 900px)`.
 - **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
   - default: false.

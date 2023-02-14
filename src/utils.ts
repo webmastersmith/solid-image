@@ -138,7 +138,7 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
     formats: f,
     imgPath: o?.imgPath?.[0] ? o.imgPath[0] : '',
     imgName,
-    lazy: o?.lazy?.[0] !== 'true' ? 'eager' : 'lazy',
+    loading: o?.loading?.[0] === 'eager' ? 'eager' : 'lazy',
     name,
     mediaQuery: o?.media?.[0] ? o.media[0] : '',
     newFileName: '',

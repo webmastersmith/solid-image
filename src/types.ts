@@ -18,7 +18,7 @@ export interface SharpDetails {
   formats: string[];
   imgPath: string;
   imgName: string;
-  lazy: string; // eager | lazy
+  loading: string; // eager | lazy
   mediaQuery: string;
   name: string;
   newFileName: string;
