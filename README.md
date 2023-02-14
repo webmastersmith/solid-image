@@ -26,8 +26,8 @@ This will only create one img/picture element at a time. For art direction you c
 3. Add the following code.
 
 ```js
-import AnyName from 'solid-image';
-AnyName('see url examples below 👇');
+import createImages from 'solid-image'; // name can be any name you like.
+createImages('see url examples below 👇');
 ```
 
 4. Run:
@@ -174,11 +174,11 @@ createImages([
 **createImages.ts**
 
 ```ts
-await createImages(
+createImages(
   'public/header/logo/bolt.gif?w=25;55&f=gif:4&animated=true&sizes=62px&c=bolt&alt=lighting bolt image'
 );
 // or
-await createImages([
+createImages([
   //must be nested array.
   [
     'public/header/logo/bolt.gif',
@@ -220,7 +220,7 @@ export default function Logo(props: any) {
 
 ```ts
 // w=300. Original image is 265w x 253h. Image will not be enlarged. Output will be same size as image.
-await createImages(
+createImages(
   'public/header/texasFlag.png?w=100;200;300&f=png;avif;webp&fallbackWidth=100&alt=Image of Texas Flag&sizes=100px&c=texasImage&sharpen=true'
 );
 ```
@@ -269,7 +269,7 @@ export default function TexasImage() {
 **createImages.ts**
 
 ```ts
-await createImages([
+createImages([
   [
     'public/hero/hero-full.jpg',
     'w=600;800;1200;2400',
