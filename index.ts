@@ -1,13 +1,7 @@
-// import fs from 'fs';
-// import path from 'path';
-// import sharp from 'sharp';
-// import { SharpDetails } from './src/types';
 import { updateUrlParams, parseURL, getMetadata } from './src/utils';
 import createSources from './src/createSources';
 import createFallbackImage from './src/createFallbackImage';
 import resolutionSwitching from './src/resolutionSwitching';
-
-//   await createImages('hero.jpg?w=100;200;300&f=avif;webp;jpg&alt=my new image');
 
 /**
  * During development, create images, and console.log img/picture element.
@@ -18,12 +12,12 @@ export default async function createImages(urls: string | string[] | string[][])
   // modify url to path[] format.
   const urlPaths = updateUrlParams(urls);
 
-  console.log(process.argv.slice(2));
+  // console.log(process.argv.slice(2));
 
+  const sources: string[][] = [];
   // loop all the urls
   for (let [i, urlParams] of urlPaths.entries()) {
     // 1. create/write image for each url, return state to build html img/picture element.
-    const sources: string[][] = [];
     const sharpDetails = parseURL(urlParams, urlPaths); // details object
 
     // get original image width, height and metadata format.
@@ -48,7 +42,6 @@ export default async function createImages(urls: string | string[] | string[][])
       if (i !== urls.length - 1) {
         const { _sources } = await createSources(sharpDetails);
         sources.push(_sources);
-        console.log('sources', sources);
       } else {
         // last url, make default img tag.
         const { _sources } = await createSources(sharpDetails);
