@@ -16,6 +16,27 @@ Inspired by: [Jonas Kruckenberg: imagetools](https://github.com/JonasKruckenberg
   - I wanted the img/picture element without JS. If the img/picture element is not available when the HTMl is loaded, then the browser will download the wrong images.
   - I could only get the imagetools build output to be JS, which defeats the purpose of responsive images.
 
+## Install & Run:
+
+This will only create one img/picture element at a time. For art direction you can use multiple urls and the media attribute.
+
+1. Install
+   1. `npm i -D solid-image`
+2. Create a Javascript file in `root` directory. ex.. `touch images.js`
+3. Add the following code.
+
+```js
+import AnyName from 'solid-image';
+AnyName('see url examples below 👇');
+```
+
+4. Run:
+   1. `node YourFileName.js`
+5. The images will be created in the same directory the source image is in.
+   1. A folder will be created with the same name as the image.
+   2. The images will be created inside this new folder.
+   3. The HTML img/picture element code will be output to console.
+
 ## Understanding Resolutions Switching, Multiple Formats, Art Direction
 
 **Resolution Switching**
@@ -73,27 +94,6 @@ Inspired by: [Jonas Kruckenberg: imagetools](https://github.com/JonasKruckenberg
   <img src="image.jpg" alt="my image" />
 </picture>
 ```
-
-### Install & Run:
-
-This will only create one img/picture element at a time. For art direction you can use multiple urls and the media attribute.
-
-1. Install
-   1. `npm i -D solid-image`
-2. Create a Javascript file in `root` directory. ex.. `touch images.js`
-3. Add `import AnyName from 'solid-image';` to top of file. (See URL Examples 👇).
-
-```js
-import AnyName from 'solid-image';
-AnyName('see url examples below 👇');
-```
-
-4. Run:
-   1. `node YourFileName.ts`
-5. The images will be created in the same directory the source image is in.
-   1. A folder will be created with the same name as the image.
-   2. The images will be created inside this new folder.
-   3. The HTML img/picture element code will be output to console.
 
 ## URL Options
 
