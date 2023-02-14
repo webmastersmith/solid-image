@@ -56,7 +56,7 @@ createImages('see url examples below 👇');
 
 - uses the `picture` element.
 - **Pros**
-  - Allows the use of new and highly optimized image formats, and fallback formats for browsers that don't support the format.
+  - Allows the use of new and highly optimized image formats, and fallback formats for browsers that don't support newer formats.
 - **Cons**
   - code is complex and easy to get wrong.
   - order matters. Browser takes the first truthy value.
@@ -108,7 +108,11 @@ createImages('see url examples below 👇');
   - Currently the Sharp library will only convert animated gif's to gif or webp format correctly.
   - Animated gif's to avif format does not work correctly.
 - **c** = className to add to img/picture element. CSS Modules style. ex.. `c=heroImage`
-  - default: pic
+  - default: pic.
+- **debug** = print to console state after each image creation.
+  - default: false.
+- **enlarge** = allow image size to grow beyond original image size to create desired aspect ratio or desired width.
+  - default: false.
 - **f** = format types. Can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
   - Sharp defaults are used if you leave off quality.
   - Gif images: The quality represents the number of colors between 1-256. ex.. `gif:3`
@@ -121,14 +125,14 @@ createImages('see url examples below 👇');
 - **fallbackFormat**: format you want fallback image to be. ex.. `fallbackFormat=jpg`
   - default: jpg.
 - **flatten**: formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
-  - default: false.
+  - default: ''. // empty.
 - **flattenColor**: hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
   - default: black.
 - **media** = Art Direction only. ex.. `media=(min-width: 900px)`.
 - **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
   - default: false.
 - **sizes** = All responsive images need the `sizes` attribute.
-  - default is `100vw`
+  - default: `100vw`
   - ex.. `sizes=((min-width: 50em) and (max-width: 60em)) 50em, 20em`.
 - **w** = width of images. ex.. `w=600;800;1000`
   - If width is not provided, output image will be same size as input image.
