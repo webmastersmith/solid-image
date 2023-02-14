@@ -138,6 +138,8 @@ createImages('see url examples below 👇');
 ### URL Examples
 
 ```ts
+import createImages from 'solid-image';
+
 createImages('public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image');
 // or
 createImages([
