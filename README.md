@@ -26,7 +26,7 @@ This will only create one img/picture element at a time. For art direction you c
 3. Add the following code.
 
 ```js
-import createImages from 'solid-image'; // name can be any name you like.
+import createImages from 'solid-image'; // default export 'name' can be any name you like.
 createImages('see url examples below 👇');
 ```
 
