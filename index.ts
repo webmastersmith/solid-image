@@ -2,9 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
-(async function () {
-  await createImages('your image url here');
-})();
+// (async function () {
+//   await createImages('hero.jpg?w=100;200;300&f=avif;webp;jpg&alt=my new image');
+// })();
 
 /**
  * During development, create images, and console.log img/picture element.

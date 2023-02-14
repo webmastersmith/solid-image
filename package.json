@@ -1,8 +1,8 @@
 {
-  "name": "@webmastersmith/solid-images",
+  "name": "solid-image",
   "version": "0.0.1",
   "description": "Use the Sharp Library to quickly create images HTML code",
-  "main": "createImages.ts",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
