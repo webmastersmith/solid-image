@@ -12,7 +12,9 @@ export default async function resolutionSwitching(sharpDetails: SharpDetails) {
   // call again for fallback image.
   const img = `<img srcset="${_sources.join(', ')}" sizes="${sharpDetailsFinal.sizes}" src="${
     sharpDetailsFinal.srcPath
-  }" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}}/>`;
+  }" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} loading="${
+    sharpDetailsFinal.lazy
+  }"/>`;
   console.log(img);
   return;
 }

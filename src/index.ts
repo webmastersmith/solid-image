@@ -57,7 +57,7 @@ export default async function createImages(urls: string | string[] | string[][])
         // create jpg fallback image.
         const sharpDetailsFinal = await createFallbackImage(sharpDetails);
         // create fallback image.
-        const fallbackImg = `<img src="${sharpDetailsFinal.srcPath}" width="${sharpDetailsFinal.desiredWidth}" height="${sharpDetailsFinal.desiredHeight}" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} />`;
+        const fallbackImg = `<img src="${sharpDetailsFinal.srcPath}" width="${sharpDetailsFinal.desiredWidth}" height="${sharpDetailsFinal.desiredHeight}" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} loading="${sharpDetailsFinal.lazy}" />`;
         sources.push([fallbackImg]);
         // 2. add picture tag and console.log.
         const pic = `<picture class={styles.${sharpDetailsFinal.className}}>${sources

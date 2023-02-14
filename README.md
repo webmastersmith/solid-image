@@ -30,7 +30,7 @@ import createImages from 'solid-image'; // default export 'name' can be any name
 createImages('see url examples below 👇');
 ```
 
-4. Run:
+4. **Run:**
    1. `node YourFileName.js`
 5. The images will be created in the same directory the source image is in.
    1. A folder will be created with the same name as the image.
@@ -118,16 +118,18 @@ createImages('see url examples below 👇');
   - Gif images: The quality represents the number of colors between 1-256. ex.. `gif:3`
     - original gif image colors are used if you leave quality off.
     - gif will only have 3 colors. This is a good way to reduce gif image size.
-- **fallbackWidth**: width of fallback image. ex.. `fallbackWidth=700`
+- **fallbackWidth** = width of fallback image. ex.. `fallbackWidth=700`
   - default: 700px wide.
   - The fallback img aspect will come from the last url.
   - Fallback Image is created in same directory as last url.
-- **fallbackFormat**: format you want fallback image to be. ex.. `fallbackFormat=jpg`
+- **fallbackFormat** = format you want fallback image to be. ex.. `fallbackFormat=jpg`
   - default: jpg.
-- **flatten**: formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
+- **flatten** = formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
   - default: ''. // empty.
-- **flattenColor**: hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
+- **flattenColor** = hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
   - default: black.
+- **lazy** = image loading attribute. ex.. `lazy=false` // loading='eager'.
+  - default: true
 - **media** = Art Direction only. ex.. `media=(min-width: 900px)`.
 - **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
   - default: false.
@@ -149,7 +151,7 @@ import createImages from 'solid-image';
 createImages('public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image');
 // or
 createImages([
-  'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image'
+  'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image',
   'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image'
 ])
 // or
