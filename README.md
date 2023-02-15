@@ -234,7 +234,7 @@ export default function Logo(props: any) {
 
 ```js
 import createImages from 'solid-image';
-// w=300. Original image is 265w x 253h. Image will not be enlarged. Output will be same size as image.
+// w=300. Original image is 265w x 253h. Image will be enlarged.
 createImages(
   'public/header/texasFlag.png?w=100;200;300&f=png;avif;webp&fallbackWidth=100&alt=Image of Texas Flag&sizes=100px&c=texasImage&sharpen=true'
 );
