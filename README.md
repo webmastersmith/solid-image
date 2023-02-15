@@ -12,9 +12,8 @@ I built this to use with SolidStart meta framework. Until they can get a native 
 Inspired by: [Jonas Kruckenberg: imagetools](https://github.com/JonasKruckenberg/imagetools)
 
 - Unfortunately I could not get his wonderful library to do what I wanted: create static images and raw code at develop time.
-- imagetools embedded JS code at build time, (possibly because I don't know what I'm doing 😁)
-  - I wanted the img/picture element without JS. If the img/picture element is not available when the HTMl is loaded, then the browser will download the wrong images.
-  - I could only get the imagetools build output to be JS, which defeats the purpose of responsive images.
+- imagetools embedded JS code at build time, (possibly because I don't know what I'm doing 😁).
+  - If the img/picture element is not available when the HTMl is loaded, then the browser may download the wrong images. This defeats the purpose of responsive images.
 
 ## Install & Run:
 
@@ -34,8 +33,8 @@ createImages('see url examples below 👇');
    1. `node YourFileName.js`
       1. This library uses modern import/export syntax. You will need:
          1. `"type": "module"` in your package.json
-         2. or
-         3. `YourFileName.mjs` // name your file with a `mjs` extension.
+            // **or**
+         2. `YourFileName.mjs` // name your file with a `mjs` extension.
 5. The images will be created in the same directory the source image is in.
    1. A folder will be created with the same name as the image.
    2. The images will be created inside this new folder.
