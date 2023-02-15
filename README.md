@@ -154,8 +154,8 @@ import createImages from 'solid-image';
 createImages('public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image');
 // or
 createImages([
-  'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image',
-  'public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image'
+  'public/hero/hero.jpg?a=9:16w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image',
+  'public/hero/hero.jpg?a=16:9w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image'
 ])
 // or
 createImages([
@@ -219,6 +219,9 @@ export default function Logo(props: any) {
       src="/header/logo/bolt/bolt_2-3_55x81.gif"
       alt="lighting bolt image"
       class={styles.bolt}
+      width="55"
+      height="81"
+      loading="lazy"
     />
   );
 }
@@ -269,6 +272,7 @@ export default function TexasImage() {
         height="95"
         alt="Image of Texas Flag"
         class={styles.texasImage}
+        loading="lazy"
       />
     </picture>
   );
@@ -365,6 +369,7 @@ export default function HeroImage() {
         height="394"
         alt="Image of house and pool with custom lighting"
         class={styles.heroImage}
+        loading="eager"
       />
     </picture>
   );

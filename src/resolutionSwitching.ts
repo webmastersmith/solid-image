@@ -12,9 +12,9 @@ export default async function resolutionSwitching(sharpDetails: SharpDetails) {
   // create the fallback img string and output to console.
   const img = `<img srcset="${_sources.join(', ')}" sizes="${sharpDetailsFinal.sizes}" src="${
     sharpDetailsFinal.srcPath
-  }" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} width=${
+  }" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} width="${
     sharpDetailsFinal.desiredWidth
-  } height=${sharpDetailsFinal.desiredHeight} loading="${sharpDetailsFinal.loading}"/>`;
+  }" height="${sharpDetailsFinal.desiredHeight}" loading="${sharpDetailsFinal.loading}"/>`;
   console.log(img);
   return;
 }
