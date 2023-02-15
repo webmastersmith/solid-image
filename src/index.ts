@@ -3,15 +3,16 @@ import createFallbackImage from './createFallbackImage.js';
 import resolutionSwitching from './resolutionSwitching.js';
 import sharp from 'sharp';
 import { updateUrlParams, parseURL, getMetadata, progressBar } from './utils.js';
+import { URLS } from './types.js';
 //@ts-ignore
 import ProgressBar from 'console-progress-bar';
 
 /**
  * During development, create images, and console.log img/picture element.
- * @param urls string[] of urls.
+ * @param urls image input params.
  * @returns void
  */
-export default async function createImages(urls: string | string[] | string[][]): Promise<void> {
+export default async function createImages(urls: URLS): Promise<void> {
   // modify url to path[] format.
   const urlPaths = updateUrlParams(urls);
 
@@ -54,9 +55,8 @@ export default async function createImages(urls: string | string[] | string[][])
         // last url, make default img tag.
         const { _sources } = await createSources(sharpDetails);
         sources.push(_sources);
-        // create jpg fallback image.
-        const sharpDetailsFinal = await createFallbackImage(sharpDetails);
         // create fallback image.
+        const sharpDetailsFinal = await createFallbackImage(sharpDetails);
         const fallbackImg = `<img src="${sharpDetailsFinal.srcPath}" width="${sharpDetailsFinal.desiredWidth}" height="${sharpDetailsFinal.desiredHeight}" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} loading="${sharpDetailsFinal.loading}" />`;
         sources.push([fallbackImg]);
         // 2. add picture tag and console.log.

@@ -12,7 +12,14 @@
     "pac": "npm version patch --no-git-tag-version && npm publish",
     "dry": "npm publish --dry-run"
   },
-  "keywords": [],
+  "keywords": [
+    "responsive",
+    "image",
+    "img",
+    "picture",
+    "resolution switching",
+    "Art Direction"
+  ],
   "author": "Bryon Smith",
   "license": "ISC",
   "devDependencies": {

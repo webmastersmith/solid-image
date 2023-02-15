@@ -2,22 +2,18 @@ import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 import { SharpDetails } from './types.js';
-import { createPaths } from './utils.js';
+import { createPaths, separateFormatAndQuality } from './utils.js';
 
 /**
- * create/write images to folder. Return srcset values.
- * @param sizeDetails image state.
- * @returns creates/writes image, returns srcset imgPath and width.
+ * Build the image to desired params. Write image to folder. Return srcset values.
+ * @param sharpDetails Sharp image state.
+ * @returns returns srcset imgPath and width.
  */
 export default async function createSrcset(
   sharpDetails: SharpDetails
 ): Promise<{ srcset: string; sharpDetailsFinished: SharpDetails }> {
-  const [format, quality = ''] = sharpDetails.currentFormat.split(':') as any;
-  sharpDetails.currentFormat = format;
-
-  if (+quality) {
-    sharpDetails.quality = +quality;
-  }
+  // update state with desired format and desired quality.
+  separateFormatAndQuality(sharpDetails);
 
   // instantiate sharp image.
   let _img = sharp(`${path.join(process.cwd(), sharpDetails.imgPath)}`, {
@@ -28,11 +24,12 @@ export default async function createSrcset(
   if (sharpDetails.flattenColor || sharpDetails.flatten[0]) {
     // only flatten currentFormat if in flatten list.
     if (sharpDetails.flatten.includes(sharpDetails.currentFormat)) {
-      _img.flatten({ background: `#${sharpDetails.flattenColor}` }); // create white background when regions are transparent.
+      // create colored background when regions are transparent.
+      _img.flatten({ background: `#${sharpDetails.flattenColor}` });
     }
   }
 
-  //
+  // Formatting
   if (sharpDetails.currentFormat === 'jpeg' || sharpDetails.currentFormat === 'jpg') {
     if (sharpDetails.quality) {
       _img.toFormat(sharpDetails.currentFormat, { mozjpeg: true, quality: sharpDetails.quality });

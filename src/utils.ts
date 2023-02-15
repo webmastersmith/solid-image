@@ -2,6 +2,11 @@ import path from 'path';
 import sharp from 'sharp';
 import { SharpDetails, URLS } from './types.js';
 
+/**
+ * Input urls can be a string, string[], or string[][]. Returns standardized string[].
+ * @param urls input url params.
+ * @returns urls in an array.
+ */
 export function updateUrlParams(urls: URLS): string[] {
   let urlPaths = [];
   // make sure single url is an array.
@@ -22,6 +27,11 @@ export function updateUrlParams(urls: URLS): string[] {
   return urlPaths;
 }
 
+/**
+ * Count images that will be created. Use the count to build progress bar.
+ * @param urls string[]
+ * @returns number of images * 2.
+ */
 export function progressBar(urls: string[]): number {
   let imgNum = 1;
 
@@ -64,10 +74,10 @@ export function progressBar(urls: string[]): number {
 }
 
 /**
- * Image State.
+ * Build Sharp image State.
  * @param rawUrl  string
- * @param urls all urls passed to function
- * @returns sharpDetails object
+ * @param urls all urls as an array.
+ * @returns sharpDetails state object.
  */
 export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
   // 'hero.jpg?w=300;600;900&a=9:16&f=avif;jpg;png&sharpen=true&d=700&alt=the dog and the cat'
@@ -91,6 +101,8 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
         w.push(+width);
       }
     }
+    // sort widths lowest to highest number
+    w.sort((a, b) => a - b);
   } else {
     w = [0];
   }
@@ -156,6 +168,11 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
   return sharpDetails;
 }
 
+/**
+ * Get original image size and format.
+ * @param sharpDetails image state
+ * @returns object: width, height, format
+ */
 export async function getMetadata(sharpDetails: SharpDetails) {
   const {
     width = 0,
@@ -166,8 +183,8 @@ export async function getMetadata(sharpDetails: SharpDetails) {
 }
 
 /**
- * When given width / height, find closest aspect ratio.
- * @param val width / height
+ * When given (width / height), find closest aspect ratio.
+ * @param val (width / height)
  * @returns  string. ex.. '16:9'
  */
 export function findAspectRatio(val: number) {
@@ -204,10 +221,12 @@ export function findAspectRatio(val: number) {
 }
 
 /**
- * When given width and desired aspectRatio, return height.
- * @param desiredWidth desired width of image
- * @param aspectRatio
- * @returns number height to keep aspectRatio as a number.
+ *
+ * @param orgWidth original image width
+ * @param orgHeight original image height
+ * @param desiredWidth the width you would like image to be.
+ * @param aspectRatio desired aspect ratio image should be. This takes priority over height.
+ * @returns height needed to achieve aspect ratio or original image ratio.
  */
 export function getHeight(
   orgWidth: number,
@@ -225,14 +244,9 @@ export function getHeight(
 }
 
 /**
- * If width size and aspect ratio will cause sharp to enlarge image, calculate max width size.
- *       // width and aspect ratio may create height taller than original Image height. Reduce width till height is same size as original image height.
-      //get height if height is bigger than orgImage, reduce height by one.
- * @param desiredWidth number. Desired width that you want image to be.
- * @param orgImgWidth number. Original image width.
- * @param orgImgHeight number. Original image height.
- * @param aspect string. AspectRatio as string. ex.. '16:9'
- * @returns object. {resizeWidth, resizeHeight}
+ * Determine final image size from width, height, enlarge, and aspect ratio. Aspect ratio controls the height. If no aspect ratio, original image ratio determines the height.
+ * @param sharpDetails Sharp image state
+ * @returns final image size: width, height
  */
 export function findWidthAndHeight(sharpDetails: SharpDetails) {
   let { orgWidth, orgHeight, desiredWidth, desiredAspect } = sharpDetails;
@@ -256,10 +270,9 @@ export function findWidthAndHeight(sharpDetails: SharpDetails) {
 }
 
 /**
- * Create the paths needed to write images and img src attribute.
- * @param sharpDetails url params
- * @param newImgMeta metadata from newly created image.
- * @returns paths to image.
+ *
+ * @param sharpDetails Sharp image state
+ * @returns create path and image name.
  */
 export function createPaths(sharpDetails: SharpDetails) {
   const { desiredAspect, desiredHeight, desiredWidth, currentFormat, imgPath, name } = sharpDetails;
@@ -278,4 +291,17 @@ export function createPaths(sharpDetails: SharpDetails) {
   const folderPath = path.join(process.cwd(), folderStructure, name);
   const writePath = path.join(folderPath, newFileName);
   return { newFileName, srcPath, folderPath, writePath };
+}
+
+/**
+ * Separate desired format and desired quality. Update state.
+ * @param sharpDetails Sharp image state
+ */
+export function separateFormatAndQuality(sharpDetails: SharpDetails) {
+  const [format, quality = ''] = sharpDetails.currentFormat.split(':');
+  sharpDetails.currentFormat = format;
+
+  if (+quality) {
+    sharpDetails.quality = +quality;
+  }
 }
