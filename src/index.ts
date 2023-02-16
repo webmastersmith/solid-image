@@ -2,13 +2,20 @@ import createSources from './createSources.js';
 import createFallbackImage from './createFallbackImage.js';
 import resolutionSwitching from './resolutionSwitching.js';
 import sharp from 'sharp';
-import { updateUrlParams, parseURL, getMetadata, progressBar } from './utils.js';
+import {
+  updateUrlParams,
+  parseURL,
+  getMetadata,
+  progressBar,
+  removeOldFiles,
+  fillWritePaths,
+} from './utils.js';
 import { URLS } from './types.js';
 //@ts-ignore
 import ProgressBar from 'console-progress-bar';
 
 /**
- * During development, create images, and console.log img/picture element.
+ * @summary During development, create images, and console.log img/picture element.
  * @param urls image input params.
  * @returns void
  */
@@ -23,11 +30,20 @@ export default async function createImages(urls: URLS): Promise<void> {
     bar.addValue(1);
   });
 
+  // Global State
   const sources: string[][] = [];
+  // track the created file names. compare with folder to see if old images need to be deleted.
+  // @ts-ignore
+  const allWritePaths = new Map();
+  let clean = false;
+
   // loop all the urls
   for (let [i, urlParams] of urlPaths.entries()) {
-    // 1. create/write image for each url, return state to build html img/picture element.
+    // 1. create Sharp State.
     const sharpDetails = parseURL(urlParams, urlPaths); // details object
+
+    // if any url has clean, delete old image files inside the solid-image created folder.
+    if (sharpDetails.clean) clean = true;
 
     // get original image width, height and metadata format.
     const { width = 0, height = 0, format = '' } = await getMetadata(sharpDetails);
@@ -41,31 +57,44 @@ export default async function createImages(urls: URLS): Promise<void> {
 
     // BUILD IMAGE
     // RESOLUTION SWITCHING.
-    if (sharpDetails.formats.length <= 1 && sharpDetails.urls.length === 1) {
-      await resolutionSwitching(sharpDetails);
-      // end early.
-      return;
+    if (sharpDetails.formats.length === 1 && sharpDetails.urls.length === 1) {
+      const { writePaths, sharpDetailsFinal } = await resolutionSwitching(sharpDetails);
+      // record the write paths under the current folder path.
+      sharpDetailsFinal._writePaths = writePaths.flat(Infinity) as string[];
+      fillWritePaths(sharpDetailsFinal, allWritePaths);
+
       // Art Direction or Multiple Formats or Both.
     } else {
       // do this until last url.
       if (i !== urls.length - 1) {
-        const { _sources } = await createSources(sharpDetails);
+        const { _sources, sharpDetailsFinal } = await createSources(sharpDetails);
         sources.push(_sources);
+        // record the write paths under the current folder path.
+        fillWritePaths(sharpDetailsFinal, allWritePaths);
       } else {
         // last url, make default img tag.
-        const { _sources } = await createSources(sharpDetails);
+        let { _sources, sharpDetailsFinal } = await createSources(sharpDetails);
         sources.push(_sources);
+        // record the write paths under the current folder path.
+        fillWritePaths(sharpDetailsFinal, allWritePaths);
+
         // create fallback image.
-        const sharpDetailsFinal = await createFallbackImage(sharpDetails);
+        sharpDetailsFinal = await createFallbackImage(sharpDetails);
+        // record the write paths under the current folder path.
+        fillWritePaths(sharpDetailsFinal, allWritePaths);
         const fallbackImg = `<img src="${sharpDetailsFinal.srcPath}" width="${sharpDetailsFinal.desiredWidth}" height="${sharpDetailsFinal.desiredHeight}" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} loading="${sharpDetailsFinal.loading}" />`;
         sources.push([fallbackImg]);
         // 2. add picture tag and console.log.
-        const pic = `<picture class={styles.${sharpDetailsFinal.className}}>${sources
+        const pic = `\n<picture class={styles.${sharpDetailsFinal.className}}>${sources
           .flat(Infinity)
-          .join('')}</picture>`;
+          .join('')}</picture>\n`;
         console.log(pic);
-        return;
       }
-    }
+    } // end Art Direction
+  } // end URL loop
+
+  // if deleteOldFiles=true, remove old images.
+  if (clean) {
+    removeOldFiles(allWritePaths);
   }
 }

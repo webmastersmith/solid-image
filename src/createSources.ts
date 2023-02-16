@@ -13,6 +13,7 @@ export default async function createSources(
   sharpDetails: SharpDetails
 ): Promise<{ _sources: string[]; sharpDetailsFinal: SharpDetails }> {
   const sources: string[] = [];
+  const writePaths: string[] = [];
   let sharpDetailsFinal = sharpDetails;
   // record state. Reset to this state value for each format.
   const sharpDetailsDefault = sharpDetails;
@@ -21,7 +22,7 @@ export default async function createSources(
   for (const format of sharpDetails.formats) {
     // resetting state with each format.
     sharpDetails = sharpDetailsDefault;
-    // Check for accidental semicolon on end of formats. Make sure formats is not just empty by only skipping format if more than 1 and format has falsey value.
+    // Check for accidental semicolon on end of formats. If no format is provided, don't skip. Only skip format if more than one format and the format is falsey.
     if (sharpDetails.formats.length > 1 && !format) continue;
     // if only one format provided is falsey, assign original image format.
     if (sharpDetails.formats.length === 1 && !format) {
@@ -41,25 +42,31 @@ export default async function createSources(
         sharpDetails.desiredHeight = sharpDetails.orgHeight;
       } else {
         sharpDetails.desiredWidth = width;
-        const { desiredWidth, desiredHeight } = findWidthAndHeight(sharpDetails);
-        sharpDetails.desiredWidth = desiredWidth;
-        sharpDetails.desiredHeight = desiredHeight;
+        // assign image width and height based on original image or aspect
+        findWidthAndHeight(sharpDetails);
       }
       // create & write image. Return image metadata.
       const { srcset, sharpDetailsFinished } = await createSrcset(sharpDetails);
 
       // check if srcset already exist in array.
-      if (!srcsets.includes(srcset)) srcsets.push(srcset);
+      if (!srcsets.includes(srcset)) {
+        srcsets.push(srcset);
+        // track images created to delete old images in same folder.
+        writePaths.push(sharpDetailsFinished.newFileName);
+      }
 
       // if last width, save sharpDetails,
       if (i === sharpDetails.widths.length - 1) {
-        // is this a fallback image? Just return new image state.
+        // last width, record the write paths.
+        sharpDetailsFinished._writePaths = writePaths;
+        // is this a fallback image? Only one width and format. No return of sources. Just return new image state.
         if (sharpDetails._fallback) {
+          // record the image path.
           return { _sources: [''], sharpDetailsFinal: sharpDetailsFinished };
         }
         // Resolution Switching
         if (sharpDetailsFinished.formats.length === 1 && sharpDetailsFinished.urls.length === 1) {
-          // no other formats, return early.
+          // img element. No other formats, return early.
           return { _sources: srcsets, sharpDetailsFinal: sharpDetailsFinished };
         }
         // the last format will be what the sharpDetails state is.
@@ -92,5 +99,6 @@ export default async function createSources(
     }
   } // end outer loop
   // return sources array
+  sharpDetailsFinal._writePaths = writePaths;
   return { _sources: sources, sharpDetailsFinal };
 }

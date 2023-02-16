@@ -39,6 +39,7 @@ createImages('see url examples below 👇');
    1. A folder will be created with the same name as the image.
    2. The images will be created inside this new folder.
    3. The HTML img/picture element code will be output to console.
+6. **Note: Your folder or file names cannot have spaces.**
 
 ## Understanding Resolutions Switching, Multiple Formats, Art Direction
 
@@ -114,10 +115,13 @@ createImages('see url examples below 👇');
   - default: pic.
 - **debug** = print to console state after each image creation.
   - default: false.
+- **clean** = delete old images inside the solid-image folder. Be careful! All old files inside the solid-image created folder will be deleted.
+  - default: false
 - **enlarge** = allow image size to grow beyond original image size to create desired aspect ratio or desired width.
   - default: true.
 - **f** = format types. Can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
   - Sharp defaults are used if you leave off quality. ex.. `f=avif;webp;jpg`
+  - Supported formats: `heif,avif,jpeg,jpg,png,tiff,webp,gif`.
   - Gif images: The quality represents the number of colors between 1-256. ex.. `gif:3`
     - original gif image colors are used if you leave quality off.
     - gif will only have 3 colors. This is a good way to reduce gif image size.

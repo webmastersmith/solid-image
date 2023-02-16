@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 import { SharpDetails, URLS } from './types.js';
@@ -13,7 +14,7 @@ export function updateUrlParams(urls: URLS): string[] {
   if (!Array.isArray(urls)) urls = [urls];
 
   for (let url of urls) {
-    // if inner array is an array, convert to path.
+    // if inner array is an array, convert to urlPath.
     if (Array.isArray(url)) {
       // add query
       const [one, two, ...rest] = url;
@@ -129,11 +130,12 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
     flatten.push('');
   }
 
-  // set defaults if query does not exist.
+  // build initial state.
   const sharpDetails: SharpDetails = {
     alt: o?.alt?.[0] ? o.alt[0] : 'This is a image',
     animated: o?.animated?.[0] === 'true' ? true : false,
     className: o?.c?.[0] ? o.c[0] : 'pic',
+    clean: o?.clean?.[0] === 'true' ? true : false,
     currentFormat: '',
     debug: o?.debug?.[0] === 'true' ? true : false,
     desiredAspect: o?.a?.[0] ? o.a[0] : '',
@@ -164,6 +166,7 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
     urls,
     widths: w,
     writePath: '',
+    _writePaths: [], // internal use
   };
   return sharpDetails;
 }
@@ -266,7 +269,10 @@ export function findWidthAndHeight(sharpDetails: SharpDetails) {
       desiredHeight = getHeight(orgWidth, orgHeight, desiredWidth, desiredAspect);
     }
   }
-  return { desiredWidth, desiredHeight };
+
+  sharpDetails.desiredWidth = desiredWidth;
+  sharpDetails.desiredHeight = desiredHeight;
+  return;
 }
 
 /**
@@ -274,7 +280,7 @@ export function findWidthAndHeight(sharpDetails: SharpDetails) {
  * @param sharpDetails Sharp image state
  * @returns create path and image name.
  */
-export function createPaths(sharpDetails: SharpDetails) {
+export function createPaths(sharpDetails: SharpDetails): void {
   const { desiredAspect, desiredHeight, desiredWidth, currentFormat, imgPath, name } = sharpDetails;
   // get folder structure for path.
   const folderStructure = imgPath.split('/').slice(0, -1).join('/');
@@ -287,14 +293,17 @@ export function createPaths(sharpDetails: SharpDetails) {
     a = findAspectRatio(desiredWidth / desiredHeight).replace(':', '-');
   }
   const newFileName = `${name}_${a}_${desiredWidth}x${desiredHeight}.${currentFormat}`;
-  const srcPath = `${folderStructure.replace('public', '').replace('//', '/')}/${name}/${newFileName}`;
+  sharpDetails.newFileName = newFileName;
+  sharpDetails.srcPath = `${folderStructure.replace('public', '').replace('//', '/')}/${name}/${newFileName}`;
+
   const folderPath = path.join(process.cwd(), folderStructure, name);
-  const writePath = path.join(folderPath, newFileName);
-  return { newFileName, srcPath, folderPath, writePath };
+  sharpDetails.folderPath = folderPath;
+  sharpDetails.writePath = path.join(folderPath, newFileName);
+  return;
 }
 
 /**
- * Separate desired format and desired quality. Update state.
+ * @summary Separate desired format and desired quality. Update state.
  * @param sharpDetails Sharp image state
  */
 export function separateFormatAndQuality(sharpDetails: SharpDetails) {
@@ -303,5 +312,41 @@ export function separateFormatAndQuality(sharpDetails: SharpDetails) {
 
   if (+quality) {
     sharpDetails.quality = +quality;
+  }
+}
+
+/**
+ * @summary Remove old files not created.
+ * @param sharpDetails Sharp State
+ * @param newFiles list of all files created.
+ */
+export function removeOldFiles(allWritePaths: Map<string, string[]>) {
+  // loop each folder path, compare newImages with folder files.
+  for (const writePath of allWritePaths) {
+    // writePath: [ string, string[][] ]
+    const folderPath = writePath[0];
+    const newImageFiles = writePath[1].flat(Infinity);
+    // for each path get files in folder and compare
+    const files = fs.readdirSync(folderPath);
+    // loop files
+    for (const file of files) {
+      // name does not exist in new files array. delete.
+      if (!newImageFiles.includes(file)) {
+        const d = path.join(folderPath, file);
+        fs.unlinkSync(d);
+        console.log('Deleted: ', d);
+      }
+    }
+  }
+}
+
+export function fillWritePaths(sharpDetails: SharpDetails, allWritePaths: Map<string, string[]>) {
+  // track all image paths and what's in them.
+  if (allWritePaths.has(sharpDetails.folderPath)) {
+    // @ts-ignore. Get the array then push into path array.
+    allWritePaths.get(sharpDetails.folderPath).push(sharpDetails._writePaths);
+    // else, path does not exist.
+  } else {
+    allWritePaths.set(sharpDetails.folderPath, sharpDetails._writePaths);
   }
 }

@@ -47,6 +47,7 @@ export default async function createSrcset(
     sharpDetails.currentFormat === 'webp' ||
     sharpDetails.currentFormat === 'avif' ||
     sharpDetails.currentFormat === 'svg' ||
+    sharpDetails.currentFormat === 'heif' ||
     sharpDetails.currentFormat === 'tiff'
   ) {
     if (sharpDetails.quality) {
@@ -76,18 +77,26 @@ export default async function createSrcset(
   }
 
   // find path to write image.
-  const { newFileName, srcPath, folderPath, writePath } = createPaths(sharpDetails);
-  sharpDetails.srcPath = srcPath;
-  sharpDetails.newFileName = newFileName;
-  sharpDetails.folderPath = folderPath;
-  sharpDetails.writePath = writePath;
+  createPaths(sharpDetails);
 
   // print state to console
   if (sharpDetails.debug) console.log(sharpDetails);
 
-  if (!fs.existsSync(folderPath)) {
-    fs.mkdirSync(folderPath, { recursive: true });
+  if (!fs.existsSync(sharpDetails.folderPath)) {
+    fs.mkdirSync(sharpDetails.folderPath, { recursive: true });
   }
-  await _img.toFile(writePath);
-  return { srcset: `${srcPath} ${sharpDetails.desiredWidth}w`, sharpDetailsFinished: sharpDetails };
+
+  // if image already exist, don't spend time writing it.
+  if (!fs.existsSync(sharpDetails.writePath)) {
+    await _img.toFile(sharpDetails.writePath);
+  } else {
+    // fill the console progress bar. Run twice because emit get's called twice with every image creation.
+    sharp.queue.emit('change');
+    sharp.queue.emit('change');
+  }
+
+  return {
+    srcset: `${sharpDetails.srcPath} ${sharpDetails.desiredWidth}w`,
+    sharpDetailsFinished: sharpDetails,
+  };
 }

@@ -2,6 +2,7 @@ export interface SharpDetails {
   alt: string;
   animated: boolean;
   className: string;
+  clean: boolean; // delete old image files.
   currentFormat: string; // f = 'avif:50' -format and quality can be combined.
   debug: boolean;
   desiredAspect: string; // aspect
@@ -32,6 +33,7 @@ export interface SharpDetails {
   urls: string[];
   widths: number[];
   writePath: string;
+  _writePaths: string[]; // internal use
 }
 
 export type URLS = string | string[] | string[][];
