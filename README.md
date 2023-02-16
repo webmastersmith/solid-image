@@ -113,9 +113,9 @@ createImages('see url examples below 👇');
   - Animated gif's to avif format does not work correctly.
 - **c** = className to add to img/picture element. CSS Modules style. ex.. `c=heroImage`
   - default: pic.
+- **clean** = delete old images inside the solid-image folder. Be careful! All old files inside the solid-image created folder will be deleted.
 - **debug** = print to console state after each image creation.
   - default: false.
-- **clean** = delete old images inside the solid-image folder. Be careful! All old files inside the solid-image created folder will be deleted.
   - default: false
 - **enlarge** = allow image size to grow beyond original image size to create desired aspect ratio or desired width.
   - default: true.
