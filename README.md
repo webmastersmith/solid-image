@@ -19,9 +19,13 @@ Inspired by: [Jonas Kruckenberg: imagetools](https://github.com/JonasKruckenberg
 
 This will only create one img/picture element at a time. For art direction you can use multiple urls and the media attribute.
 
-1. Install
+1. **Install**
    1. `npm i -D solid-image`
 2. Create a Javascript file in the `root` directory. ex.. `images.js`
+   1. This library uses modern import/export syntax. You will need:
+      1. `"type": "module"` in your package.json // **or**
+      2. `YourFileName.mjs` // name your file with a `mjs` extension.
+   2. **Note: Your folder or image file names cannot have spaces.**
 3. Add the following code.
 
 ```js
@@ -31,15 +35,10 @@ createImages('see url examples below 👇');
 
 4. **Run:**
    1. `node YourFileName.js`
-      1. This library uses modern import/export syntax. You will need:
-         1. `"type": "module"` in your package.json
-            // **or**
-         2. `YourFileName.mjs` // name your file with a `mjs` extension.
 5. The images will be created in the same directory the source image is in.
    1. A folder will be created with the same name as the image.
    2. The images will be created inside this new folder.
    3. The HTML img/picture element code will be output to console.
-6. **Note: Your folder or file names cannot have spaces.**
 
 ## Understanding Resolutions Switching, Multiple Formats, Art Direction
 
