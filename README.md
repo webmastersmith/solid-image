@@ -138,6 +138,8 @@ createImages('see url examples below 👇');
 - **loading** = image loading attribute. Two options: 'eager' | 'lazy' ex.. `loading=eager`.
   - default: 'lazy'.
 - **media** = Art Direction only. ex.. `media=(min-width: 900px)`.
+- **progressBar** = show progress bar while running. ex.. `progressBar=false`
+  - default: true
 - **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
   - default: false.
 - **sizes** = All responsive images need the `sizes` attribute.

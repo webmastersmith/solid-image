@@ -158,6 +158,7 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
     newFileName: '',
     orgWidth: 0,
     orgHeight: 0,
+    progressBar: o?.progressBar?.[0] === 'false' ? false : true,
     quality: 0,
     sharpen: o?.sharpen?.[0] === 'true' ? true : false,
     sizes: o?.sizes?.[0] ? o.sizes[0] : '100vw',

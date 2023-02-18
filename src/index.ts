@@ -24,11 +24,13 @@ export default async function createImages(urls: URLS): Promise<void> {
   const urlPaths = updateUrlParams(urls);
 
   // progress bar.
-  const barNum = progressBar(urlPaths);
-  const bar = new ProgressBar({ maxValue: barNum });
-  sharp.queue.on('change', function (queueLength) {
-    bar.addValue(1);
-  });
+  if (!/progressBar=false/i.test(urlPaths.join(''))) {
+    const barNum = progressBar(urlPaths);
+    const bar = new ProgressBar({ maxValue: barNum });
+    sharp.queue.on('change', function (queueLength) {
+      bar.addValue(1);
+    });
+  }
 
   // Global State
   const sources: string[][] = [];

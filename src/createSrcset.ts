@@ -46,7 +46,6 @@ export default async function createSrcset(
     sharpDetails.currentFormat === 'png' ||
     sharpDetails.currentFormat === 'webp' ||
     sharpDetails.currentFormat === 'avif' ||
-    sharpDetails.currentFormat === 'svg' ||
     sharpDetails.currentFormat === 'heif' ||
     sharpDetails.currentFormat === 'tiff'
   ) {
