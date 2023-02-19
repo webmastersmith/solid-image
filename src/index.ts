@@ -23,7 +23,7 @@ export default async function createImages(urls: URLS): Promise<void> {
   // modify url to path[] format.
   const urlPaths = updateUrlParams(urls);
 
-  // progress bar.
+  // if progressBar: false, skip this block.
   if (!/progressBar=false/i.test(urlPaths.join(''))) {
     const barNum = progressBar(urlPaths);
     const bar = new ProgressBar({ maxValue: barNum });
