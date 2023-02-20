@@ -70,7 +70,7 @@ export default async function createImages(urls: URLS): Promise<string> {
       // Art Direction or Multiple Formats or Both.
     } else {
       // do this until last url.
-      if (i !== urls.length - 1) {
+      if (i !== urlPaths.length - 1) {
         const { _sources, sharpDetailsFinal } = await createSources(sharpDetails);
         sources.push(_sources);
         // record the write paths under the current folder path.
@@ -89,10 +89,10 @@ export default async function createImages(urls: URLS): Promise<string> {
         const fallbackImg = `<img src="${sharpDetailsFinal.srcPath}" width="${sharpDetailsFinal.desiredWidth}" height="${sharpDetailsFinal.desiredHeight}" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} loading="${sharpDetailsFinal.loading}" />`;
         sources.push([fallbackImg]);
         // 2. add picture tag and console.log.
-        const pic = `\n<picture class={styles.${sharpDetailsFinal.className}}>${sources
+        const pic = `<picture class={styles.${sharpDetailsFinal.className}}>${sources
           .flat(Infinity)
-          .join('')}</picture>\n`;
-        console.log(pic);
+          .join('')}</picture>`;
+        console.log(`\n${pic}\n`);
         finalReturn = pic;
       }
     } // end Art Direction

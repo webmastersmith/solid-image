@@ -14,12 +14,12 @@ export default async function resolutionSwitching(sharpDetails: SharpDetails) {
     allWritePaths.push(sharpDetailsFinal._writePaths);
   }
   // create the fallback img string and output to console.
-  const img = `\n<img srcset="${_sources.join(', ')}" sizes="${sharpDetailsFinal.sizes}" src="${
+  const img = `<img srcset="${_sources.join(', ')}" sizes="${sharpDetailsFinal.sizes}" src="${
     sharpDetailsFinal.srcPath
   }" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} width="${
     sharpDetailsFinal.desiredWidth
-  }" height="${sharpDetailsFinal.desiredHeight}" loading="${sharpDetailsFinal.loading}"/>\n`;
+  }" height="${sharpDetailsFinal.desiredHeight}" loading="${sharpDetailsFinal.loading}"/>`;
   // output img element to console.
-  console.log(img);
+  console.log(`\n${img}\n`);
   return { writePaths: allWritePaths, sharpDetailsFinal, img };
 }
