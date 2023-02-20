@@ -70,7 +70,7 @@ createImages('see url examples below 👇');
   <source srcset="image-1.avif 500w, image-2.avif 1000w" type="image/avif" sizes="100px" />
   <source srcset="image-1.webp 500w, image-2.webp 1000w" type="image/webp" sizes="100px" />
   <source srcset="image-1.png 500w, image-2.png 1000w" type="image/png" sizes="100px" />
-  <img src="image-1.png" alt="Human" loading="lazy" width="1000" height="836" />
+  <img src="image-1.png" alt="Human" loading="lazy" width="500" height="836" />
 </picture>
 ```
 
@@ -102,7 +102,7 @@ createImages('see url examples below 👇');
 
 - **a** = aspect ratio. Crop image from center, to create desired aspect ratio. ex..`a=16:9`
   - If aspect is not provided, output image will be same aspect as input image.
-  - Image will not be enlarged. Image width will be reduced until aspect ratio 'height' is same size or smaller than original image height.
+  - If `enlarge=false`, image width will be reduced to maintain aspect ratio until 'height' is same size or smaller than original image height.
 - **alt** = img element `alt` attribute text. ex.. `alt=my image`.
   - default: "This is a image"
 - **animated** = ex.. `animated=true`
@@ -115,7 +115,7 @@ createImages('see url examples below 👇');
 - **clean** = delete old images inside the solid-image folder. ex.. `clean=true`
   - Be careful! All old files inside the solid-image created folder will be deleted.
   - default: false.
-- **debug** = print to console state after each image creation.
+- **debug** = print to console Sharp 'state' after each image creation.
   - default: false
 - **enlarge** = allow image size to grow beyond original image size to create desired aspect ratio or desired width.
   - default: true.

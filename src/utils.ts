@@ -4,11 +4,11 @@ import sharp from 'sharp';
 import { SharpDetails, URLS } from './types.js';
 
 /**
- * Input urls can be a string, string[], or string[][]. Returns standardized string[].
+ * Input urls can be a string, string[], or string[][]. Returns normalized string[].
  * @param urls input url params.
  * @returns urls in an array.
  */
-export function updateUrlParams(urls: URLS): string[] {
+export function normalizeUrls(urls: URLS): string[] {
   let urlPaths = [];
   // make sure single url is an array.
   if (!Array.isArray(urls)) urls = [urls];
@@ -33,7 +33,7 @@ export function updateUrlParams(urls: URLS): string[] {
  * @param urls string[]
  * @returns number of images * 2.
  */
-export function progressBar(urls: string[]): number {
+export function countImages(urls: string[]): number {
   let imgNum = 1;
 
   // count images
@@ -341,6 +341,11 @@ export function removeOldFiles(allWritePaths: Map<string, string[]>) {
   }
 }
 
+/**
+ * @summary Check if image folder path exist in Map, if exist, push new image paths, else create new image folder path w/ image paths. Because multiple url's can have different images, the image folder path can be different. This tracks the correct image folder path to add image paths to.
+ * @param sharpDetails Sharp State
+ * @param allWritePaths string of images paths that have been written.
+ */
 export function fillWritePaths(sharpDetails: SharpDetails, allWritePaths: Map<string, string[]>) {
   // track all image paths and what's in them.
   if (allWritePaths.has(sharpDetails.folderPath)) {

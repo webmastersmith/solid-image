@@ -3,10 +3,10 @@ import createFallbackImage from './createFallbackImage.js';
 import resolutionSwitching from './resolutionSwitching.js';
 import sharp from 'sharp';
 import {
-  updateUrlParams,
+  normalizeUrls,
   parseURL,
   getMetadata,
-  progressBar,
+  countImages,
   removeOldFiles,
   fillWritePaths,
 } from './utils.js';
@@ -19,13 +19,13 @@ import ProgressBar from 'console-progress-bar';
  * @param urls image input params.
  * @returns void
  */
-export default async function createImages(urls: URLS): Promise<void> {
+export default async function createImages(urls: URLS): Promise<string> {
   // modify url to path[] format.
-  const urlPaths = updateUrlParams(urls);
+  const urlPaths = normalizeUrls(urls);
 
   // if progressBar: false, skip this block.
   if (!/progressBar=false/i.test(urlPaths.join(''))) {
-    const barNum = progressBar(urlPaths);
+    const barNum = countImages(urlPaths);
     const bar = new ProgressBar({ maxValue: barNum });
     sharp.queue.on('change', function (queueLength) {
       bar.addValue(1);
@@ -38,6 +38,7 @@ export default async function createImages(urls: URLS): Promise<void> {
   // @ts-ignore
   const allWritePaths = new Map();
   let clean = false;
+  let finalReturn = '';
 
   // loop all the urls
   for (let [i, urlParams] of urlPaths.entries()) {
@@ -60,7 +61,8 @@ export default async function createImages(urls: URLS): Promise<void> {
     // BUILD IMAGE
     // RESOLUTION SWITCHING.
     if (sharpDetails.formats.length === 1 && sharpDetails.urls.length === 1) {
-      const { writePaths, sharpDetailsFinal } = await resolutionSwitching(sharpDetails);
+      const { writePaths, sharpDetailsFinal, img } = await resolutionSwitching(sharpDetails);
+      finalReturn = img;
       // record the write paths under the current folder path.
       sharpDetailsFinal._writePaths = writePaths.flat(Infinity) as string[];
       fillWritePaths(sharpDetailsFinal, allWritePaths);
@@ -91,6 +93,7 @@ export default async function createImages(urls: URLS): Promise<void> {
           .flat(Infinity)
           .join('')}</picture>\n`;
         console.log(pic);
+        finalReturn = pic;
       }
     } // end Art Direction
   } // end URL loop
@@ -99,4 +102,5 @@ export default async function createImages(urls: URLS): Promise<void> {
   if (clean) {
     removeOldFiles(allWritePaths);
   }
+  return finalReturn;
 }
