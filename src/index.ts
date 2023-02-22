@@ -13,8 +13,7 @@ import {
 import { URLS } from './types.js';
 //@ts-ignore
 import ProgressBar from 'console-progress-bar';
-import Image from './Image.jsx';
-export default Image;
+
 /**
  * @summary During development, create images, and console.log img/picture element.
  * @param urls image input params.
