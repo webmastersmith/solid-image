@@ -29,7 +29,7 @@ This will only create one img/picture element at a time. For art direction you c
 3. Add the following code.
 
 ```js
-import createImages from 'solid-image'; // default export 'name' can be any name you like.
+import { createImages } from 'solid-image';
 createImages('see url examples below 👇');
 ```
 
@@ -139,6 +139,8 @@ createImages('see url examples below 👇');
   - default: 'lazy'.
 - **media** = Art Direction only. ex.. `media=(min-width: 900px)`.
   - default: ''.
+- **print** = print `img | picture` element to console.log. ex.. `print=false`
+  - default: true
 - **progressBar** = show progress bar while running. ex.. `progressBar=false`
   - default: true
 - **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
@@ -302,14 +304,12 @@ createImages([
     'w=600;800;1200;2400',
     'a=9:16',
     'f=avif;webp;jpg',
-    'fallbackWidth=700',
-    'fallbackFormat=jpg',
     'alt=Image of house and pool with custom lighting',
     'sizes=100vw',
     'c=heroImage',
     'media=(max-width: 600px)',
   ],
-
+  // fallback info comes from last url.
   [
     'public/hero/hero.jpg',
     'w=600;800;1200;2400',
@@ -322,6 +322,7 @@ createImages([
     'c=heroImage',
     'media=(min-width: 601px)',
     'sharpen=true',
+    'loading=eager',
   ],
 ]);
 ```

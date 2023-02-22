@@ -25,6 +25,7 @@ export interface SharpDetails {
   newFileName: string;
   orgHeight: number;
   orgWidth: number;
+  print: boolean;
   progressBar: boolean;
   quality: number;
   sharpen: boolean; // boolean

@@ -18,8 +18,9 @@ export default async function resolutionSwitching(sharpDetails: SharpDetails) {
     sharpDetailsFinal.srcPath
   }" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} width="${
     sharpDetailsFinal.desiredWidth
-  }" height="${sharpDetailsFinal.desiredHeight}" loading="${sharpDetailsFinal.loading}"/>`;
+  }" height="${sharpDetailsFinal.desiredHeight}" loading="${sharpDetailsFinal.loading}" />`;
+
   // output img element to console.
-  console.log(`\n${img}\n`);
+  if (sharpDetailsFinal.print) console.log(`\n${img}\n`);
   return { writePaths: allWritePaths, sharpDetailsFinal, img };
 }

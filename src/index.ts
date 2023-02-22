@@ -13,13 +13,14 @@ import {
 import { URLS } from './types.js';
 //@ts-ignore
 import ProgressBar from 'console-progress-bar';
-
+import Image from './Image.jsx';
+export default Image;
 /**
  * @summary During development, create images, and console.log img/picture element.
  * @param urls image input params.
  * @returns void
  */
-export default async function createImages(urls: URLS): Promise<string> {
+export async function createImages(urls: URLS): Promise<string> {
   // modify url to path[] format.
   const urlPaths = normalizeUrls(urls);
 
@@ -92,7 +93,9 @@ export default async function createImages(urls: URLS): Promise<string> {
         const pic = `<picture class={styles.${sharpDetailsFinal.className}}>${sources
           .flat(Infinity)
           .join('')}</picture>`;
-        console.log(`\n${pic}\n`);
+
+        // turn off print if desired.
+        if (sharpDetailsFinal.print) console.log(`\n${pic}\n`);
         finalReturn = pic;
       }
     } // end Art Direction
