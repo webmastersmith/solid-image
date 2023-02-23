@@ -390,4 +390,4 @@ export default function HeroImage() {
 
 ## License
 
-Published under the MIT licence. © Bryon Smith 2023.
+Published under the MIT license. © Bryon Smith 2023.
