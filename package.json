@@ -1,6 +1,6 @@
 {
   "name": "solid-image",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Use the Sharp Image Library to quickly create images and HTML code",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -9,8 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -fr lib/* && tsc",
-    "prepac": "npm run build",
-    "pac": "npm version patch --no-git-tag-version && npm publish",
+    "prepub": "npm run build",
+    "pub": "npm version patch --no-git-tag-version && npm publish",
     "dry": "npm publish --dry-run"
   },
   "keywords": [
