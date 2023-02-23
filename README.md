@@ -383,3 +383,7 @@ export default function HeroImage() {
   );
 }
 ```
+
+## License
+
+Published under the MIT licence. © Bryon Smith 2023.

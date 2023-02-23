@@ -1,6 +1,6 @@
 {
   "name": "solid-image",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Use the Sharp Image Library to quickly create images and HTML code",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -22,7 +22,7 @@
     "Art Direction"
   ],
   "author": "Bryon Smith",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.13.0",
     "@types/sharp": "^0.31.1",
