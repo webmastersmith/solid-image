@@ -15,6 +15,10 @@ Inspired by: [Jonas Kruckenberg: imagetools](https://github.com/JonasKruckenberg
 - imagetools embedded JS code at build time, (possibly because I don't know what I'm doing 😁).
   - If the img/picture element is not available when the HTMl is loaded, then the browser may download the wrong images. This defeats the purpose of responsive images.
 
+## Using Vite?
+
+- [vite-plugin-solid-image](https://www.npmjs.com/package/vite-plugin-solid-image)
+
 ## Install & Run:
 
 This will only create one img/picture element at a time. For art direction you can use multiple urls and the media attribute.
