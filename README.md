@@ -119,9 +119,9 @@ createImages('see url examples below 👇');
 - **clean** = delete old images inside the solid-image folder. ex.. `clean=true`
   - Be careful! All old files inside the solid-image created folder will be deleted.
   - default: false.
-- **debug** = print to console Sharp 'state' after each image creation.
+- **debug** = print to console Sharp 'state' after each image creation. `debug=true`
   - default: false
-- **enlarge** = allow image size to grow beyond original image size to create desired aspect ratio or desired width.
+- **enlarge** = allow image size to grow beyond original image size to create desired aspect ratio or desired width. `enlarge=false`
   - default: true.
 - **f** = format types. Can also include quality to reduce image. ex.. `f=avif:50;webp:80;jpg;png:100`.
   - Sharp defaults are used if you leave off quality. ex.. `f=avif;webp;jpg`
@@ -144,9 +144,9 @@ createImages('see url examples below 👇');
 - **media** = Art Direction only. ex.. `media=(min-width: 900px)`.
   - default: ''.
 - **print** = print `img | picture` element to console.log. ex.. `print=false`
-  - default: true
+  - default: true _// vite-plugin-solid-image default: false_.
 - **progressBar** = show progress bar while running. ex.. `progressBar=false`
-  - default: true
+  - default: true _// vite-plugin-solid-image default: false_.
 - **sharpen** = sharpen image. This process does increases the image size. ex.. `sharpen=true`.
   - default: false.
 - **sizes** = All responsive images need the `sizes` attribute.
