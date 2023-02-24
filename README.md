@@ -109,6 +109,7 @@ createImages('see url examples below 👇');
   - If `enlarge=false`, image width will be reduced to maintain aspect ratio until 'height' is same size or smaller than original image height.
 - **alt** = img element `alt` attribute text. ex.. `alt=my image`.
   - default: "This is a image"
+  - The last url must have the `alt=...` for the fallback image.
 - **animated** = ex.. `animated=true`
   - default: false.
   - Used with gif, webp, avif. Keep the animation when changing formats.
