@@ -30,6 +30,7 @@ This will only create one img/picture element at a time. For art direction you c
       1. `"type": "module"` in your package.json // **or**
       2. `YourFileName.mjs` // name your file with a `mjs` extension.
    2. **Note: Your folder or image file names cannot have spaces.**
+   3. The shortest url: `public/yourImage.jpg?` // must have the `?` on the end.
 3. Add the following code.
 
 ```js
@@ -163,7 +164,7 @@ createImages('see url examples below 👇');
 **YourFileName.js**
 
 ```ts
-import createImages from 'solid-image';
+import { createImages } from 'solid-image';
 
 createImages('public/hero/hero.jpg?w=300;600;900&f=avif;webp;jpg&sharpen=true&alt=my image');
 // or
@@ -201,7 +202,7 @@ createImages([
 **YourFileName.js**
 
 ```js
-import createImages from 'solid-image';
+import { createImages } from 'solid-image';
 createImages(
   'public/header/logo/bolt.gif?w=25;55&f=gif:4&animated=true&sizes=62px&c=bolt&alt=lighting bolt image'
 );
@@ -250,7 +251,7 @@ export default function Logo(props: any) {
 **YourFileName.js**
 
 ```js
-import createImages from 'solid-image';
+import { createImages } from 'solid-image';
 // w=300. Original image is 265w x 253h. Image will be enlarged.
 createImages(
   'public/header/texasFlag.png?w=100;200;300&f=png;avif;webp&fallbackWidth=100&alt=Image of Texas Flag&sizes=100px&c=texasImage&sharpen=true'

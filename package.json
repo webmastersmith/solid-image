@@ -1,6 +1,6 @@
 {
   "name": "solid-image",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "Use the Sharp Image Library to quickly create images and HTML code",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
