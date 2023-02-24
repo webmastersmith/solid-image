@@ -303,7 +303,7 @@ export default function TexasImage() {
 **YourFileName.js**
 
 ```js
-import createImages from 'solid-image';
+import { createImages } from 'solid-image';
 createImages([
   [
     'public/hero/hero-full.jpg',
