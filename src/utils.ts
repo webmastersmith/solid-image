@@ -94,7 +94,7 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
   const imgName = o?.imgPath?.[0].split('/').pop() ?? '';
   const [name, ext] = imgName.split('/').pop()?.split('.') as string[];
 
-  // remove accidental semi-colon on end.
+  // remove accidental semi-colon on end on width.
   let w: number[] = [];
   if (o?.w && o?.w?.length !== 0) {
     for (const width of o.w) {
@@ -107,7 +107,7 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
   } else {
     w = [0];
   }
-  // remove accidental semi-colon on end.
+  // remove accidental semi-colon on end of format.
   let f: string[] = [];
   if (o?.f && o?.f.length !== 0) {
     for (const format of o.f) {
@@ -118,7 +118,7 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
   } else {
     f = [''];
   }
-  // remove accidental semi-colon on end.
+  // remove accidental semi-colon on end of flatten.
   const flatten: string[] = [];
   if (o?.flatten && o?.flatten.length !== 0) {
     for (const format of o.flatten) {
@@ -134,7 +134,8 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
   const sharpDetails: SharpDetails = {
     alt: o?.alt?.[0] ? o.alt[0] : 'This is a image',
     animated: o?.animated?.[0] === 'true' ? true : false,
-    className: o?.c?.[0] ? o.c[0] : 'pic',
+    c: o?.c?.[0] ? o.c[0] : '',
+    className: o?.className?.[0] === 'false' ? 'class' : 'className',
     clean: o?.clean?.[0] === 'true' ? true : false,
     currentFormat: '',
     debug: o?.debug?.[0] === 'true' ? true : false,
@@ -155,6 +156,7 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
     loading: o?.loading?.[0] === 'eager' ? 'eager' : 'lazy',
     name,
     mediaQuery: o?.media?.[0] ? o.media[0] : '',
+    module: o?.module?.[0] === 'true' ? true : false,
     newFileName: '',
     orgWidth: 0,
     orgHeight: 0,

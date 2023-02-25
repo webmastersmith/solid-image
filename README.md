@@ -116,8 +116,14 @@ createImages('see url examples below 👇');
   - Used with gif, webp, avif. Keep the animation when changing formats.
   - Currently the Sharp library will only convert animated gif's to gif or webp format correctly.
   - Animated gif's to avif format does not work correctly.
-- **c** = className to add to img/picture element. CSS Modules style. ex.. `c=heroImage`
-  - default: pic.
+- **c** = class names to add to img/picture element. ex.. `c=heroImage`
+  - default: ''.
+  - The last url will control the module, classes, className.
+  - If `module=true`, you can only have one class name.
+  - **tailwind**
+    - `c=bg-green-300 m-4 rounded !font-medium basis-1/4`
+- **className** = class or className. Should your class be called className? ex.. `className=false`
+  - default true. _the css class will be called 'className'_
 - **clean** = delete old images inside the solid-image folder. ex.. `clean=true`
   - Be careful! All old files inside the solid-image created folder will be deleted.
   - default: false.
@@ -145,6 +151,13 @@ createImages('see url examples below 👇');
   - default: 'lazy'.
 - **media** = Art Direction only. ex.. `media=(min-width: 900px)`.
   - default: ''.
+- **module** = css modules? ex.. `module=true`
+  - default: false
+  - the last url will control the module, classes, className.
+  - `module=true`
+    - `className={styles.class1}` // only one class name for module.
+  - `module=false`
+    - `className="class1 class2"` // can have multiple class names.
 - **print** = print `img | picture` element to console.log. ex.. `print=false`
   - default: true _// vite-plugin-solid-image default: false_.
 - **progressBar** = show progress bar while running. ex.. `progressBar=false`

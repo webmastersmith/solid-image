@@ -86,10 +86,17 @@ export async function createImages(urls: URLS): Promise<string> {
         sharpDetailsFinal = await createFallbackImage(sharpDetails);
         // record the write paths under the current folder path.
         fillWritePaths(sharpDetailsFinal, allWritePaths);
-        const fallbackImg = `<img src="${sharpDetailsFinal.srcPath}" width="${sharpDetailsFinal.desiredWidth}" height="${sharpDetailsFinal.desiredHeight}" alt="${sharpDetailsFinal.alt}" class={styles.${sharpDetailsFinal.className}} loading="${sharpDetailsFinal.loading}" />`;
+
+        // create the fallback img string and output to console.
+        // react = className, solidjs= class
+        const classes = sharpDetailsFinal.module
+          ? `{styles.${sharpDetailsFinal.c}}`
+          : `"${sharpDetailsFinal.c}"`;
+
+        const fallbackImg = `<img src="${sharpDetailsFinal.srcPath}" width="${sharpDetailsFinal.desiredWidth}" height="${sharpDetailsFinal.desiredHeight}" alt="${sharpDetailsFinal.alt}" ${sharpDetailsFinal.className}=${classes} loading="${sharpDetailsFinal.loading}" />`;
         sources.push([fallbackImg]);
         // 2. add picture tag and console.log.
-        const pic = `<picture class={styles.${sharpDetailsFinal.className}}>${sources
+        const pic = `<picture ${sharpDetailsFinal.className}=${classes}>${sources
           .flat(Infinity)
           .join('')}</picture>`;
 
