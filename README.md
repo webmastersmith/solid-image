@@ -118,16 +118,23 @@ createImages('see url examples below 👇');
   - Animated gif's to avif format does not work correctly.
 - **c** = class names to add to img/picture element. ex.. `c=heroImage`
   - default: ''.
-  - The last url will control the module, classes, className.
-  - If `module=true`, you can only have one class name.
+  - The **last url** will control the fallbackWidth, fallbackFormat, cssModule, classes, className.
+  - If `cssModule=true`, you can only have one class name.
   - **tailwind**
     - `c=bg-green-300 m-4 rounded !font-medium basis-1/4`
 - **className** = class or className. Should your class be called className? ex.. `className=false`
   - default true. _the css class will be called 'className'_
+  - The **last url** will control the fallbackWidth, fallbackFormat, cssModule, classes, className.
 - **clean** = delete old images inside the solid-image folder. ex.. `clean=true`
   - Be careful! All old files inside the solid-image created folder will be deleted.
   - default: false.
-- **debug** = print to console Sharp 'state' after each image creation. `debug=true`
+- **cssModule** = css module? ex.. `cssModule=true`
+  - default: false
+  - The **last url** will control the fallbackWidth, fallbackFormat, cssModule, classes, className.
+  - `cssModule=true`
+    - `className={Styles.class1}` // only one class name for css module.
+  - `cssModule=false`
+    - `className="class1 class2"` // can have multiple class names.- **debug** = print to console Sharp 'state' after each image creation. `debug=true`
   - default: false
 - **enlarge** = allow image size to grow beyond original image size to create desired aspect ratio or desired width. `enlarge=false`
   - default: true.
@@ -139,10 +146,11 @@ createImages('see url examples below 👇');
     - gif will only have 3 colors. This is a good way to reduce gif image size.
 - **fallbackWidth** = width of fallback image. ex.. `fallbackWidth=700`
   - default: 700px wide.
-  - The fallback img aspect will come from the last url.
+  - The **last url** will control the fallbackWidth, fallbackFormat, cssModule, classes, className.
   - Fallback Image is created in same directory as last url.
 - **fallbackFormat** = format you want fallback image to be. ex.. `fallbackFormat=jpg`
   - default: jpg.
+  - The **last url** will control the fallbackWidth, fallbackFormat, cssModule, classes, className.
 - **flatten** = formats you want flatten transparent regions. ex.. `flatten=jpg;webp`.
   - default: ''. // empty.
 - **flattenColor** = hex color code format. The background color for transparent regions. ex.. `flattenColor=FFFFFF`.
@@ -151,13 +159,6 @@ createImages('see url examples below 👇');
   - default: 'lazy'.
 - **media** = Art Direction only. ex.. `media=(min-width: 900px)`.
   - default: ''.
-- **module** = css modules? ex.. `module=true`
-  - default: false
-  - the last url will control the module, classes, className.
-  - `module=true`
-    - `className={styles.class1}` // only one class name for module.
-  - `module=false`
-    - `className="class1 class2"` // can have multiple class names.
 - **print** = print `img | picture` element to console.log. ex.. `print=false`
   - default: true _// vite-plugin-solid-image default: false_.
 - **progressBar** = show progress bar while running. ex.. `progressBar=false`
@@ -237,7 +238,7 @@ createImages([
 **YourComponent.tsx**
 
 ```tsx
-import styles from './Logo.module.scss';
+import Styles from './Logo.module.scss';
 
 export default function Logo(props: any) {
   return (
@@ -246,7 +247,7 @@ export default function Logo(props: any) {
       sizes="62px"
       src="/header/logo/bolt/bolt_2-3_55x81.gif"
       alt="lighting bolt image"
-      class={styles.bolt}
+      class={Styles.bolt}
       width="55"
       height="81"
       loading="lazy"
@@ -274,11 +275,11 @@ createImages(
 **YourComponent.tsx**
 
 ```tsx
-import styles from './TexasImage.module.scss';
+import Styles from './TexasImage.module.scss';
 
 export default function TexasImage() {
   return (
-    <picture class={styles.texasImage}>
+    <picture class={Styles.texasImage}>
       <source
         type="image/avif"
         srcset="/header/texasFlag/texasFlag_20-19_100x95.avif 100w, /header/texasFlag/texasFlag_22-21_200x191.avif 200w, /header/texasFlag/texasFlag_22-21_265x253.avif 265w"
@@ -299,7 +300,7 @@ export default function TexasImage() {
         width="100"
         height="95"
         alt="Image of Texas Flag"
-        class={styles.texasImage}
+        class={Styles.texasImage}
         loading="lazy"
       />
     </picture>
@@ -349,11 +350,11 @@ createImages([
 **YourComponent.tsx**
 
 ```tsx
-import styles from './HeroImage.module.scss';
+import Styles from './HeroImage.module.scss';
 
 export default function HeroImage() {
   return (
-    <picture class={styles.heroImage}>
+    <picture class={Styles.heroImage}>
       <source
         type="image/avif"
         srcset="/hero/hero-full/hero-full_9-16_600x1067.avif 600w, /hero/hero-full/hero-full_9-16_800x1422.avif 800w, /hero/hero-full/hero-full_9-16_900x1600.avif 900w"
@@ -395,7 +396,7 @@ export default function HeroImage() {
         width="700"
         height="394"
         alt="Image of house and pool with custom lighting"
-        class={styles.heroImage}
+        class={Styles.heroImage}
         loading="eager"
       />
     </picture>

@@ -4,6 +4,7 @@ export interface SharpDetails {
   c: string; // class
   className: string; // should your class be called className? default: className
   clean: boolean; // delete old image files.
+  cssModule: boolean; // styles.class or class="class1 class2"
   currentFormat: string; // f = 'avif:50' -format and quality can be combined.
   debug: boolean;
   desiredAspect: string; // aspect
@@ -22,7 +23,6 @@ export interface SharpDetails {
   imgName: string;
   loading: string; // eager | lazy
   mediaQuery: string;
-  module: boolean; // styles.class or class="class1 class2"
   name: string;
   newFileName: string;
   orgHeight: number;

@@ -15,7 +15,9 @@ export default async function resolutionSwitching(sharpDetails: SharpDetails) {
   }
   // create the fallback img string and output to console.
   // react = className, solidjs= class
-  const classes = sharpDetailsFinal.module ? `{styles.${sharpDetailsFinal.c}}` : `"${sharpDetailsFinal.c}"`;
+  const classes = sharpDetailsFinal.cssModule
+    ? `{Styles.${sharpDetailsFinal.c}}`
+    : `"${sharpDetailsFinal.c}"`;
   // style className
   const img = `<img srcset="${_sources.join(', ')}" sizes="${sharpDetailsFinal.sizes}" src="${
     sharpDetailsFinal.srcPath

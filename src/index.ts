@@ -89,8 +89,8 @@ export async function createImages(urls: URLS): Promise<string> {
 
         // create the fallback img string and output to console.
         // react = className, solidjs= class
-        const classes = sharpDetailsFinal.module
-          ? `{styles.${sharpDetailsFinal.c}}`
+        const classes = sharpDetailsFinal.cssModule
+          ? `{Styles.${sharpDetailsFinal.c}}`
           : `"${sharpDetailsFinal.c}"`;
 
         const fallbackImg = `<img src="${sharpDetailsFinal.srcPath}" width="${sharpDetailsFinal.desiredWidth}" height="${sharpDetailsFinal.desiredHeight}" alt="${sharpDetailsFinal.alt}" ${sharpDetailsFinal.className}=${classes} loading="${sharpDetailsFinal.loading}" />`;
