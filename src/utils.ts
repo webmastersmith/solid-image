@@ -137,7 +137,7 @@ export function parseURL(rawUrl: string, urls: string[]): SharpDetails {
     c: o?.c?.[0] ? o.c[0] : '',
     className: o?.className?.[0] === 'false' ? 'class' : 'className',
     clean: o?.clean?.[0] === 'true' ? true : false,
-    cssModule: o?.cssModule?.[0] || o?.module?.[0] === 'true' ? true : false,
+    cssModule: o?.cssModule?.[0] === 'true' ? true : false,
     currentFormat: '',
     debug: o?.debug?.[0] === 'true' ? true : false,
     desiredAspect: o?.a?.[0] ? o.a[0] : '',
