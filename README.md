@@ -123,7 +123,7 @@ createImages('see url examples below 👇');
   - **tailwind**
     - `c=bg-green-300 m-4 rounded !font-medium basis-1/4`
 - **className** = class or className. Should your class be called className? ex.. `className=false`
-  - default true. _the css class will be called 'className'_
+  - default true. _// The css class will be called 'className'_
   - The **last url** will control the fallbackWidth, fallbackFormat, cssModule, classes, className.
 - **clean** = delete old images inside the solid-image folder. ex.. `clean=true`
   - Be careful! All old files inside the solid-image created folder will be deleted.
