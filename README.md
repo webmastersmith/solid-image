@@ -132,7 +132,7 @@ createImages('see url examples below 👇');
   - default: false
   - The **last url** will control the fallbackWidth, fallbackFormat, cssModule, classes, className.
   - `cssModule=true`
-    - `className={Styles.class1}` // only one class name for css module.
+    - `className={styles.class1}` // only one class name for css module.
   - `cssModule=false`
     - `className="class1 class2"` // can have multiple class names.- **debug** = print to console Sharp 'state' after each image creation. `debug=true`
   - default: false
@@ -238,7 +238,7 @@ createImages([
 **YourComponent.tsx**
 
 ```tsx
-import Styles from './Logo.module.scss';
+import styles from './Logo.module.scss';
 
 export default function Logo(props: any) {
   return (
@@ -247,7 +247,7 @@ export default function Logo(props: any) {
       sizes="62px"
       src="/header/logo/bolt/bolt_2-3_55x81.gif"
       alt="lighting bolt image"
-      class={Styles.bolt}
+      class={styles.bolt}
       width="55"
       height="81"
       loading="lazy"
@@ -275,11 +275,11 @@ createImages(
 **YourComponent.tsx**
 
 ```tsx
-import Styles from './TexasImage.module.scss';
+import styles from './TexasImage.module.scss';
 
 export default function TexasImage() {
   return (
-    <picture class={Styles.texasImage}>
+    <picture class={styles.texasImage}>
       <source
         type="image/avif"
         srcset="/header/texasFlag/texasFlag_20-19_100x95.avif 100w, /header/texasFlag/texasFlag_22-21_200x191.avif 200w, /header/texasFlag/texasFlag_22-21_265x253.avif 265w"
@@ -300,7 +300,7 @@ export default function TexasImage() {
         width="100"
         height="95"
         alt="Image of Texas Flag"
-        class={Styles.texasImage}
+        class={styles.texasImage}
         loading="lazy"
       />
     </picture>
@@ -350,11 +350,11 @@ createImages([
 **YourComponent.tsx**
 
 ```tsx
-import Styles from './HeroImage.module.scss';
+import styles from './HeroImage.module.scss';
 
 export default function HeroImage() {
   return (
-    <picture class={Styles.heroImage}>
+    <picture class={styles.heroImage}>
       <source
         type="image/avif"
         srcset="/hero/hero-full/hero-full_9-16_600x1067.avif 600w, /hero/hero-full/hero-full_9-16_800x1422.avif 800w, /hero/hero-full/hero-full_9-16_900x1600.avif 900w"
@@ -396,7 +396,7 @@ export default function HeroImage() {
         width="700"
         height="394"
         alt="Image of house and pool with custom lighting"
-        class={Styles.heroImage}
+        class={styles.heroImage}
         loading="eager"
       />
     </picture>
